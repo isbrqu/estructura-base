@@ -77,26 +77,45 @@ public class ArbolGen {
     public Lista ancestros(Object elemento) {
         Lista lista = new Lista();
         ancestrosAux(this.raiz, lista, elemento);
+        // invierto la lista debido a la que se inserta siempre en 1
         lista.invertir();
         return lista;
     }
-
+    
     private boolean ancestrosAux(NodoGen nodo, Lista lista, Object elemento) {
         boolean encontrado = false;
-        if (nodo != null) {
+        if (nodo != null){
             if (nodo.getElemento().equals(elemento)) {
                 encontrado = true;
             } else {
-                encontrado = ancestrosAux(nodo.getHijoIzquierdo(), lista, elemento);
-                if (encontrado) {
-                    lista.insertar(nodo.getElemento(), 1);
-                } else {
-                    encontrado = ancestrosAux(nodo.getHermanoDerecho(), lista, elemento);
+                NodoGen hijo = nodo.getHijoIzquierdo();
+                while (hijo != null && !encontrado) {
+                    encontrado = ancestrosAux(hijo, lista, elemento);
+                    hijo = hijo.getHermanoDerecho();
                 }
+                if (encontrado)
+                    lista.insertar(nodo.getElemento(), 1);
             }
         }
         return encontrado;
     }
+
+//    private boolean ancestrosAux(NodoGen nodo, Lista lista, Object elemento) {
+//        boolean encontrado = false;
+//        if (nodo != null) {
+//            if (nodo.getElemento().equals(elemento)) {
+//                encontrado = true;
+//            } else {
+//                encontrado = ancestrosAux(nodo.getHijoIzquierdo(), lista, elemento);
+//                if (encontrado) {
+//                    lista.insertar(nodo.getElemento(), 1);
+//                } else {
+//                    encontrado = ancestrosAux(nodo.getHermanoDerecho(), lista, elemento);
+//                }
+//            }
+//        }
+//        return encontrado;
+//    }
 
     public int altura() {
         return alturaAux(this.raiz, -1);
