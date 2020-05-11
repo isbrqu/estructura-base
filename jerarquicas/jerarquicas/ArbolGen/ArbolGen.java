@@ -128,7 +128,8 @@ public class ArbolGen {
     }
 
     public Object padre(Object elemento) {
-        return padreAux(this.raiz, elemento);
+        return (this.raiz == null || this.raiz.getElemento().equals(elemento)) ? 
+                null : padreAux(this.raiz, elemento);
     }
 
     private Object padreAux(NodoGen nodo, Object elemento) {
