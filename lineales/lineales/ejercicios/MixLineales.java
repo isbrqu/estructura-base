@@ -69,7 +69,7 @@ public class MixLineales {
         String elemento, tope;
         boolean hayBalance = true;
         while (!clon.esVacia() && hayBalance) {
-            elemento = (String) clon.obtenerFrente();
+            elemento = Character.toString((char) clon.obtenerFrente());
             if ("([{".contains(elemento)) {
                 pila.apilar(elemento);
             } else if (")]}".contains(elemento)) {
@@ -89,24 +89,42 @@ public class MixLineales {
         return hayBalance;
     }
 
-    public static void caso(Cola cola, String texto) {
+    public static void generarCola(Cola cola, String texto) {
         cola.vaciar();
         for (int i = 0; i < texto.length(); i++) 
             cola.poner(texto.charAt(i));
+    }
+
+    public static void caso(Cola cola, String texto) {
+        generarCola(cola, texto);
         System.out.println("texto: " + texto);
         System.out.println("cola: " + cola);
         Cola mix = generarOtraColaTriple(cola);
         System.out.println("mixCola: " + mix + "\n");
     }
 
+    public static void casoBalance(Cola cola, String texto) {
+        generarCola(cola, texto);
+        System.out.println("texto: " + texto);
+        System.out.println("cola: " + cola);
+        System.out.println("hay balance? " + verificarBalanceo(cola));
+    }
+
     public static void main(String[] args) {
         Cola cola = new Cola();
+        System.out.println("test generarOtraCola");
         caso(cola, "");
         caso(cola, "A");
         caso(cola, "A$B");
         caso(cola, "A$BA$B");
         caso(cola, "A$B$C$D$E$F");
         caso(cola, "AB$C$DEF");
+        System.out.println("test verificarBalance");
+        casoBalance(cola, "{5+[8*9-(4/2)+7]-1}");
+        casoBalance(cola, "{ 5 + [ 8 * 9 -( 4 / 2  + 7 ] -1 }");
+        casoBalance(cola, "{ 5 + [ 8 * 9 -( 4 / 2  + 7 ] )-1 }");
+        casoBalance(cola, "){ 5 + [ 8 * 9 -( 4 / 2 ) + 7 ] -1 }");
+        casoBalance(cola, "{ 5} + [ 8 * 9 -( 4 / 2 ) + 7 ] -1 }");
     }
 
 }
