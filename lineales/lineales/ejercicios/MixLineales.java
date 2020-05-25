@@ -10,21 +10,21 @@ public class MixLineales {
         if (!cola.esVacia()) {
             Cola clon = cola.clone();
             Pila pila = new Pila();
-            char caracter;
+            Object caracter;
             clon.poner('$');
             while (!clon.esVacia()) {
-                caracter = (char) clon.obtenerFrente();
+                caracter = clon.obtenerFrente();
                 clon.sacar();
-                if (caracter != '$') {
-                    mix.poner(caracter);
-                    pila.apilar(caracter);
-                } else {
+                if (caracter.equals('$')) {
                     while (!pila.esVacia()) {
                         mix.poner(pila.obtenerTope());
                         pila.desapilar();
                     }
                     if (!clon.esVacia())
                         mix.poner('$');
+                } else {
+                    mix.poner(caracter);
+                    pila.apilar(caracter);
                 }
             }
         }
@@ -37,16 +37,11 @@ public class MixLineales {
             Cola clon = cola.clone();
             Pila pila = new Pila();
             Cola aux = new Cola();
-            char caracter;
+            Object caracter;
             clon.poner('$');
             while (!clon.esVacia()) {
-                caracter = (char) clon.obtenerFrente();
-                clon.sacar();
-                if (caracter != '$') {
-                    mix.poner(caracter);
-                    pila.apilar(caracter);
-                    aux.poner(caracter);
-                } else {
+                caracter = clon.obtenerFrente();
+                if (caracter.equals('$')) {
                     while (!pila.esVacia()) {
                         mix.poner(pila.obtenerTope());
                         pila.desapilar();
@@ -57,7 +52,12 @@ public class MixLineales {
                     }
                     if (!clon.esVacia())
                         mix.poner('$');
+                } else {
+                    mix.poner(caracter);
+                    pila.apilar(caracter);
+                    aux.poner(caracter);
                 }
+                clon.sacar();
             }
         }
         return mix;
@@ -66,7 +66,8 @@ public class MixLineales {
     public static boolean verificarBalanceo(Cola q) {
         Cola clon = q.clone();
         Pila pila = new Pila();
-        String elemento, tope;
+        String elemento;
+        Object tope;
         boolean hayBalance = true;
         while (!clon.esVacia() && hayBalance) {
             elemento = Character.toString((char) clon.obtenerFrente());
@@ -76,7 +77,7 @@ public class MixLineales {
                 if (pila.esVacia()) {
                     hayBalance = false;
                 } else {
-                    tope = (String) pila.obtenerTope();
+                    tope = pila.obtenerTope();
                     hayBalance =
                             (tope.equals("(") && elemento.equals(")")) ||
                             (tope.equals("[") && elemento.equals("]")) ||
