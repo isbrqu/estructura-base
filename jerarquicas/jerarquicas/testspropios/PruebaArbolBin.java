@@ -56,6 +56,8 @@ public class PruebaArbolBin {
         System.out.println("Posor: " + test.listarPosorden());
         System.out.println("Nivel: " + test.niveles());
         System.out.println(test);
+
+        System.out.println(test.frontera());
     }
 
 }

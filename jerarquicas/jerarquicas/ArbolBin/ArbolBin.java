@@ -203,4 +203,21 @@ public class ArbolBin {
         return s;
     }
 
+    public Lista frontera() {
+        Lista lista = new Lista();
+        fronteraAux(this.raiz, lista);
+        return lista;
+    }
+
+    private void fronteraAux(NodoArbol nodo, Lista lista) {
+        if (nodo != null) {
+            if (nodo.getIzquierdo() == null && nodo.getDerecho() == null) {
+                lista.insertar(nodo.getElemento(), 1);
+            } else {
+                fronteraAux(nodo.getDerecho(), lista);
+                fronteraAux(nodo.getIzquierdo(), lista);
+            }
+        }
+    }
+
 }
