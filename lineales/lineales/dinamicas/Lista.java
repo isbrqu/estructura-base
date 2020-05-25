@@ -224,4 +224,26 @@ public class Lista {
         return l3;
     }
 
+    public Lista obtenerMultiplos(int num) {
+        Lista lista = new Lista();
+        Object elemento;
+        Nodo sig = this.cabecera;
+        Nodo mult;
+        int i = 1;
+        while (sig != null) {
+            elemento = sig.getElemento();
+            if (elemento.equals(num)) {
+                // se ejecuta la primer vez esto
+                mult = new Nodo(elemento, null);
+                lista.cabecera = mult;
+            } else if (i % num == 0) {
+                mult.setEnlace(new Nodo(elemento, null));
+                mult = mult.getEnlace();
+            }
+            sig = sig.getEnlace();
+            i++;
+        }
+        return lista;
+    }
+
 }
