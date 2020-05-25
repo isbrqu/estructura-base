@@ -226,7 +226,7 @@ public class Lista {
         Lista lista = new Lista();
         Object elemento;
         Nodo sig = this.cabecera;
-        Nodo mult;
+        Nodo mult = null;
         int i = 1;
         while (sig != null) {
             elemento = sig.getElemento();
