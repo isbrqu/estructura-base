@@ -155,22 +155,22 @@ public class Lista {
         }
     }
 
-    // public Lista invertir() {
-    // 	Lista invertido = new Lista();
-    // 	if (this.cabecera != null) {
-    // 		Nodo copia;
-    // 		Nodo orig = this.cabecera;
-    // 		invertido.cabecera = new Nodo(orig.getElemento(), null);
-    // 		orig = orig.getEnlace();
-    // 		while (orig != null) {
-    // 			copia = invertido.cabecera;
-    // 			invertido.cabecera = new Nodo(orig.getElemento(), copia);
-    // 			orig = orig.getEnlace();
-    // 		}
-    // 		invertido.longitud = this.longitud;
-    // 	}
-    // 	return invertido;
-    // }
+     public Lista generarInvertido() {
+     	Lista invertido = new Lista();
+     	if (this.cabecera != null) {
+     		Nodo copia;
+     		Nodo orig = this.cabecera;
+     		invertido.cabecera = new Nodo(orig.getElemento(), null);
+     		orig = orig.getEnlace();
+     		while (orig != null) {
+     			copia = invertido.cabecera;
+     			invertido.cabecera = new Nodo(orig.getElemento(), copia);
+     			orig = orig.getEnlace();
+     		}
+     		invertido.longitud = this.longitud;
+     	}
+     	return invertido;
+     }
 
     public void eliminarApariciones(Object x) {
         if (this.cabecera != null) {
