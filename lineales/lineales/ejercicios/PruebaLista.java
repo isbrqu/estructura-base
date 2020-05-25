@@ -108,6 +108,19 @@ public class PruebaLista {
         return cont;
     }
 
+    public static boolean esCapicua(Lista lista) {
+        boolean esCapicua = true;
+        int longitud = lista.longitud();
+        int mitad = longitud / 2;
+        Object e1, e2;
+        for (int i = 1; i <= mitad && esCapicua; i++) {
+            e1 = lista.recuperar(i);
+            e2 = lista.recuperar(longitud - (i - 1));
+            esCapicua = e1.equals(e2);
+        }
+        return esCapicua;
+    }
+
     public static void main(String[] args) {
         Lista l1 = new Lista();
         Lista l2 = new Lista();
@@ -118,6 +131,7 @@ public class PruebaLista {
         System.out.println("Lista 1: " + l1);
         System.out.println("Lista 2: " + l2);
         System.out.println("Interca: " + l1.intercalar(l2));
+        System.out.println("capicua? "  + esCapicua(l1));
     }
 
 }
