@@ -260,12 +260,9 @@ public class Lista {
     }
 
     private int contarRecursivoAux(Nodo nodo, Object elemento) {
-        int cant = 0;
-        if (nodo != null) {
-            cant = contarRecursivoAux(nodo.getEnlace(), elemento) +
-                    (elemento.equals(nodo.getElemento()) ? 1 : 0);
-        }
-        return cant;
+        return (nodo != null) ?
+                (contarRecursivoAux(nodo.getEnlace(), elemento) +
+                (elemento.equals(nodo.getElemento()) ? 1 : 0)) : 0;
     }
 
 }

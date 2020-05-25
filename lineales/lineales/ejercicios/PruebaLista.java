@@ -124,7 +124,7 @@ public class PruebaLista {
     public static void main(String[] args) {
         Lista l1 = new Lista();
         Lista l2 = new Lista();
-        int[] arr1 = {1, 2, 3, 2, 1, 1, 1, 2};
+        int[] arr1 = {1, 2, 3, 0, 1, 1, 1, 2};
         int[] arr2 = {};
         llenar(l1, arr1);
         llenar(l2, arr2);
