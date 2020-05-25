@@ -88,6 +88,32 @@ public class MixLineales {
         return c2;
     }
 
+    public static boolean verificarBalanceo(Cola q) {
+        Cola clon = q.clone();
+        Pila pila = new Pila();
+        String elemento, tope;
+        boolean hayBalance = true;
+        while (!clon.esVacia() && hayBalance) {
+            elemento = (String) clon.obtenerFrente();
+            if ("([{".contains(elemento)) {
+                pila.apilar(elemento);
+            } else if (")]}".contains(elemento)) {
+                if (pila.esVacia()) {
+                    hayBalance = false;
+                } else {
+                    tope = (String) pila.obtenerTope();
+                    hayBalance =
+                            (tope.equals("(") && elemento.equals(")")) ||
+                            (tope.equals("[") && elemento.equals("]")) ||
+                            (tope.equals("{") && elemento.equals("}"));
+                    pila.desapilar();
+                }
+            }
+            clon.sacar();
+        }
+        return hayBalance;
+    }
+
     public static void caso(Cola cola, String texto) {
         cola.vaciar();
         for (int i = 0; i < texto.length(); i++) 
