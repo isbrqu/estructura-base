@@ -174,7 +174,6 @@ public class Lista {
 
     public void eliminarApariciones(Object x) {
         if (this.cabecera != null) {
-            boolean primer = true;
             Nodo sig = this.cabecera;
             Nodo ant = null;
             this.cabecera = null;
@@ -182,10 +181,9 @@ public class Lista {
             while (sig != null) {
                 elemento = sig.getElemento();
                 if (!elemento.equals(x)) {
-                    if (primer) {
-                        this.cabecera = new Nodo(elemento, null);
-                        ant = this.cabecera;
-                        primer = false;
+                    if (this.cabecera == null) {
+                        ant = new Nodo(elemento, null);
+                        this.cabecera = ant;
                     } else {
                         ant.setEnlace(new Nodo(elemento, null));
                         ant = ant.getEnlace();
