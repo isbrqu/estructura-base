@@ -244,4 +244,28 @@ public class Lista {
         return lista;
     }
 
+    public int contarIterativo(Object elemento) {
+        int cant = 0;
+        Nodo sig = this.cabecera;
+        while (sig != null) {
+            if (elemento.equals(sig.getElemento()))
+                cant++;
+            sig = sig.getEnlace();
+        }
+        return cant;
+    }
+
+    public int contarRecursivo(Object elemento) {
+        return contarRecursivoAux(this.cabecera, elemento);
+    }
+
+    private int contarRecursivoAux(Nodo nodo, Object elemento) {
+        int cant = 0;
+        if (nodo != null) {
+            cant = contarRecursivoAux(nodo.getEnlace(), elemento) +
+                    (elemento.equals(nodo.getElemento()) ? 1 : 0);
+        }
+        return cant;
+    }
+
 }
