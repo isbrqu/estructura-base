@@ -31,6 +31,38 @@ public class MixLineales {
         return mix;
     }
 
+    public static Cola generarOtraColaTriple(Cola cola) {
+        Cola mix = new Cola();
+        if (!cola.esVacia()) {
+            Cola clon = cola.clone();
+            Pila pila = new Pila();
+            Cola aux = new Cola();
+            char caracter;
+            clon.poner('$');
+            while (!clon.esVacia()) {
+                caracter = (char) clon.obtenerFrente();
+                clon.sacar();
+                if (caracter != '$') {
+                    mix.poner(caracter);
+                    pila.apilar(caracter);
+                    aux.poner(caracter);
+                } else {
+                    while (!pila.esVacia()) {
+                        mix.poner(pila.obtenerTope());
+                        pila.desapilar();
+                    }
+                    while (!aux.esVacia()) {
+                        mix.poner(aux.obtenerFrente());
+                        aux.sacar();
+                    }
+                    if (!clon.esVacia())
+                        mix.poner('$');
+                }
+            }
+        }
+        return mix;
+    }
+
     public static Cola generarOtraCola2(Cola c1){
         Cola c2 = new Cola();
         Pila aux = new Pila();
@@ -62,9 +94,8 @@ public class MixLineales {
             cola.poner(texto.charAt(i));
         System.out.println("texto: " + texto);
         System.out.println("cola: " + cola);
-        Cola mix = generarOtraCola2(cola);
-        System.out.println("mixCola: " + mix);
-        System.out.println();
+        Cola mix = generarOtraColaTriple(cola);
+        System.out.println("mixCola: " + mix + "\n");
     }
 
     public static void main(String[] args) {
