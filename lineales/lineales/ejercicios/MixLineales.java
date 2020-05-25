@@ -63,31 +63,6 @@ public class MixLineales {
         return mix;
     }
 
-    public static Cola generarOtraCola2(Cola c1){
-        Cola c2 = new Cola();
-        Pila aux = new Pila();
-        Object info;
-        Cola colaclon = new Cola();
-        colaclon = c1.clone();
-        colaclon.poner('$');
-        while (colaclon.obtenerFrente() != null){
-            info = colaclon.obtenerFrente();
-            if (!info.equals('$')){
-                aux.apilar(info);
-                c2.poner(info);
-                colaclon.sacar();
-            } else {
-                while (aux.obtenerTope() != null){
-                    c2.poner(aux.obtenerTope());
-                    aux.desapilar(); 
-                }
-            }
-            c2.poner(info);
-            colaclon.sacar();
-        }
-        return c2;
-    }
-
     public static boolean verificarBalanceo(Cola q) {
         Cola clon = q.clone();
         Pila pila = new Pila();
