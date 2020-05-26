@@ -6,6 +6,12 @@ import lineales.dinamicas.Cola;
 
 public class PruebaLista {
 
+    public static void llenar(Lista lista, int[] arr) {
+        lista.vaciar();
+        for (int i = 0; i < arr.length; i++)
+            lista.insertar(arr[i], i + 1);
+    }
+
     public static Lista concatenar(Lista l1, Lista l2) {
         int len1 = l1.longitud();
         int len2 = l2.longitud();
@@ -45,12 +51,6 @@ public class PruebaLista {
             i++;
         }
         return valido;
-    }
-
-    public static void llenar(Lista lista, int[] arr) {
-        lista.vaciar();
-        for (int i = 0; i < arr.length; i++) 
-            lista.insertar(arr[i], i + 1);
     }
 
     public static Lista invertir(Lista lista) {
@@ -121,6 +121,17 @@ public class PruebaLista {
         return esCapicua;
     }
 
+    public static Lista slice(Lista lista, int i, int j) {
+        Lista slice = new Lista();
+        for (;i < j; i++)
+            slice.insertar(lista.recuperar(i));
+        return slice;
+    }
+
+    public static Lista slice(Lista lista, int i) {
+        return slice(lista, i, lista.longitud() + 1);
+    }
+
     public static void main(String[] args) {
         Lista l1 = new Lista();
         Lista l2 = new Lista();
@@ -131,10 +142,12 @@ public class PruebaLista {
         System.out.println("Lista 1: " + l1);
         System.out.println("Lista 2: " + l2);
         System.out.println("Interca: " + l1.intercalar(l2));
-        System.out.println("capicua? "  + esCapicua(l1));
-        System.out.println("capicua? "  + l1.esCapicua());
+        System.out.println("capicua? " + esCapicua(l1));
+        System.out.println("capicua? " + l1.esCapicua());
         System.out.println("ContIte: " + l1.contarIterativo(2));
         System.out.println("ContRec: " + l1.contarRecursivo(2));
+        System.out.println("Slice1 : " + slice(l1, 2));
+        System.out.println("Slice2 : " + slice(l1, 2, 3));
     }
 
 }

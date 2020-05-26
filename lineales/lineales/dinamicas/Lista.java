@@ -29,6 +29,10 @@ public class Lista {
         this.longitud = 0;
     }
 
+    public boolean insertar(Object elemento) {
+        return this.insertar(elemento, this.longitud + 1);
+    }
+    
     public boolean insertar(Object elemento, int pos) {
         boolean exito;
         if (pos < 1 || pos > this.longitud + 1) {
