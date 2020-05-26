@@ -316,4 +316,24 @@ public class Lista {
         return slice(i, this.longitud + 1);
     }
 
+    public void cut(int i, int j) {
+        int k = 1;
+        Nodo sig = this.cabecera;
+        while (k < i) {
+            sig = sig.getEnlace();
+            k++;
+        }
+        this.cabecera = sig;
+        k++;
+        while (k < j) {
+            sig = sig.getEnlace();
+            k++;
+        }
+        sig.setEnlace(null);
+    }
+
+    public void cut(int i) {
+        cut(i, this.longitud + 1);
+    }
+
 }

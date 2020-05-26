@@ -148,6 +148,13 @@ public class PruebaLista {
         System.out.println("ContRec: " + l1.contarRecursivo(2));
         System.out.println("Slice1 : " + l1.slice(2));
         System.out.println("Slice2 : " + l1.slice(2, 4));
+        l1.cut(2);
+        System.out.println("Cut 1  : " + l1);
+        l1 = new Lista();
+        llenar(l1, arr1);
+        l1.cut(2, 4);
+        System.out.println("Cut 2  : " + l1);
+        l1 = new Lista();
     }
 
 }
