@@ -124,7 +124,7 @@ public class PruebaLista {
     public static void main(String[] args) {
         Lista l1 = new Lista();
         Lista l2 = new Lista();
-        int[] arr1 = {1, 2, 3, 0, 1, 1, 1, 2};
+        int[] arr1 = {3, 3, 0, 3, 3};
         int[] arr2 = {};
         llenar(l1, arr1);
         llenar(l2, arr2);
@@ -132,6 +132,7 @@ public class PruebaLista {
         System.out.println("Lista 2: " + l2);
         System.out.println("Interca: " + l1.intercalar(l2));
         System.out.println("capicua? "  + esCapicua(l1));
+        System.out.println("capicua? "  + l1.esCapicua());
         System.out.println("ContIte: " + l1.contarIterativo(2));
         System.out.println("ContRec: " + l1.contarRecursivo(2));
     }

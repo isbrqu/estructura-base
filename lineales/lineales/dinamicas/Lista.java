@@ -265,4 +265,25 @@ public class Lista {
                 (elemento.equals(nodo.getElemento()) ? 1 : 0)) : 0;
     }
 
+    public boolean esCapicua() {
+        boolean esCapicua = true;
+        Pila pila = new Pila();
+        int mitad = this.longitud / 2;
+        int i = 0;
+        Nodo sig = this.cabecera;
+        while (i != mitad) {
+            pila.apilar(sig.getElemento());
+            sig = sig.getEnlace();
+            i++;
+        }
+        if (this.longitud % 2 != 0)
+            sig = sig.getEnlace();
+        while (sig != null && esCapicua) {
+            esCapicua = sig.getElemento().equals(pila.obtenerTope());
+            pila.desapilar();
+            sig = sig.getEnlace();
+        }
+        return esCapicua;
+    }
+
 }
