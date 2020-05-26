@@ -74,16 +74,12 @@ public class MixLineales {
             if ("([{".contains(elemento)) {
                 pila.apilar(elemento);
             } else if (")]}".contains(elemento)) {
-                if (pila.esVacia()) {
-                    hayBalance = false;
-                } else {
-                    tope = pila.obtenerTope();
-                    hayBalance =
-                            (tope.equals("(") && elemento.equals(")")) ||
-                            (tope.equals("[") && elemento.equals("]")) ||
-                            (tope.equals("{") && elemento.equals("}"));
-                    pila.desapilar();
-                }
+                tope = pila.obtenerTope();
+                hayBalance = !pila.esVacia() &&
+                        ((tope.equals("(") && elemento.equals(")")) ||
+                        (tope.equals("[") && elemento.equals("]")) ||
+                        (tope.equals("{") && elemento.equals("}")));
+                pila.desapilar();
             }
             clon.sacar();
         }
