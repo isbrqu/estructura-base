@@ -146,8 +146,8 @@ public class PruebaLista {
         System.out.println("capicua? " + l1.esCapicua());
         System.out.println("ContIte: " + l1.contarIterativo(2));
         System.out.println("ContRec: " + l1.contarRecursivo(2));
-        System.out.println("Slice1 : " + slice(l1, 2));
-        System.out.println("Slice2 : " + slice(l1, 2, 3));
+        System.out.println("Slice1 : " + l1.slice(2));
+        System.out.println("Slice2 : " + l1.slice(2, 4));
     }
 
 }

@@ -290,4 +290,30 @@ public class Lista {
         return esCapicua;
     }
 
+    public Lista slice(int i, int j) {
+        int k = 1;
+        Lista lista = new Lista();
+        Nodo sig = this.cabecera;
+        Nodo copia;
+        while (k < i) {
+            sig = sig.getEnlace();
+            k++;
+        }
+        copia = new Nodo(sig.getElemento(), null);
+        lista.cabecera = copia;
+        sig = sig.getEnlace();
+        k++;
+        while (k < j) {
+            copia.setEnlace(new Nodo(sig.getElemento(), null));
+            copia = copia.getEnlace();
+            sig = sig.getEnlace();
+            k++;
+        }
+        return lista;
+    }
+
+    public Lista slice(int i) {
+        return slice(i, this.longitud + 1);
+    }
+
 }
