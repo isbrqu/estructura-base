@@ -1,6 +1,7 @@
 package lineales.ejercicios;
 
 import lineales.dinamicas.Cola;
+import lineales.dinamicas.Lista;
 import lineales.dinamicas.Pila;
 
 public class MixLineales {
@@ -63,6 +64,41 @@ public class MixLineales {
         return mix;
     }
 
+    public static Lista generarSecuencia(Cola q, int t) {
+        Cola clon = q.clone();
+        Lista lista = new Lista();
+        Cola cola = new Cola();
+        Pila pila = new Pila();
+        Object elemento;
+        int i;
+        int longitud = 1;
+        while (!clon.esVacia()) {
+            i = 1;
+            while (!clon.esVacia() && i % (t + 1) != 0) {
+                elemento = clon.obtenerFrente();
+                pila.apilar(elemento);
+                cola.poner(elemento);
+                clon.sacar();
+                i++;
+            }
+            while (!pila.esVacia()) {
+                lista.insertar(pila.obtenerTope(), longitud);
+                pila.desapilar();
+                longitud++;
+            }
+            while (!cola.esVacia()) {
+                lista.insertar(cola.obtenerFrente(), longitud);
+                cola.sacar();
+                longitud++;
+            }
+            if (!clon.esVacia()) {
+                lista.insertar('$', longitud);
+                longitud++;
+            }
+        }
+        return lista;
+    }
+
     public static boolean verificarBalanceo(Cola q) {
         Cola clon = q.clone();
         Pila pila = new Pila();
@@ -122,6 +158,9 @@ public class MixLineales {
         casoBalance(cola, "{ 5 + [ 8 * 9 -( 4 / 2  + 7 ] )-1 }");
         casoBalance(cola, "){ 5 + [ 8 * 9 -( 4 / 2 ) + 7 ] -1 }");
         casoBalance(cola, "{ 5} + [ 8 * 9 -( 4 / 2 ) + 7 ] -1 }");
+        generarCola(cola, "1234568");
+        System.out.println("cola: " + cola);
+        System.out.println("list: " + generarSecuencia(cola, 3));
     }
 
 }
