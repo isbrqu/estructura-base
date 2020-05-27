@@ -92,16 +92,20 @@ public class MixLineales {
         Object tope;
         boolean hayBalance = true;
         while (!clon.esVacia() && hayBalance) {
+            // realizo conversion Object->char->String para poder utilizar contains
             elemento = Character.toString((char) clon.obtenerFrente());
             if ("([{".contains(elemento)) {
                 pila.apilar(elemento);
             } else if (")]}".contains(elemento)) {
-                tope = pila.obtenerTope();
-                hayBalance = !pila.esVacia() &&
-                        ((tope.equals("(") && elemento.equals(")")) ||
-                        (tope.equals("[") && elemento.equals("]")) ||
-                        (tope.equals("{") && elemento.equals("}")));
-                pila.desapilar();
+                if (!pila.esVacia()) {
+                    tope = pila.obtenerTope();
+                    hayBalance = (tope.equals("(") && elemento.equals(")")) ||
+                            (tope.equals("[") && elemento.equals("]")) ||
+                            (tope.equals("{") && elemento.equals("}"));
+                    pila.desapilar();
+                } else {
+                    hayBalance = false;
+                }
             }
             clon.sacar();
         }
