@@ -32,7 +32,7 @@ public class Lista {
     public boolean insertar(Object elemento) {
         return this.insertar(elemento, this.longitud + 1);
     }
-    
+
     public boolean insertar(Object elemento, int pos) {
         boolean exito;
         if (pos < 1 || pos > this.longitud + 1) {
@@ -159,22 +159,22 @@ public class Lista {
         }
     }
 
-     public Lista generarInvertido() {
-     	Lista invertido = new Lista();
-     	if (this.cabecera != null) {
-     		Nodo copia;
-     		Nodo orig = this.cabecera;
-     		invertido.cabecera = new Nodo(orig.getElemento(), null);
-     		orig = orig.getEnlace();
-     		while (orig != null) {
-     			copia = invertido.cabecera;
-     			invertido.cabecera = new Nodo(orig.getElemento(), copia);
-     			orig = orig.getEnlace();
-     		}
-     		invertido.longitud = this.longitud;
-     	}
-     	return invertido;
-     }
+    public Lista generarInvertido() {
+        Lista invertido = new Lista();
+        if (this.cabecera != null) {
+            Nodo copia;
+            Nodo orig = this.cabecera;
+            invertido.cabecera = new Nodo(orig.getElemento(), null);
+            orig = orig.getEnlace();
+            while (orig != null) {
+                copia = invertido.cabecera;
+                invertido.cabecera = new Nodo(orig.getElemento(), copia);
+                orig = orig.getEnlace();
+            }
+            invertido.longitud = this.longitud;
+        }
+        return invertido;
+    }
 
     public void eliminarApariciones(Object x) {
         if (this.cabecera != null) {
@@ -266,7 +266,7 @@ public class Lista {
     private int contarRecursivoAux(Nodo nodo, Object elemento) {
         return (nodo != null) ?
                 (contarRecursivoAux(nodo.getEnlace(), elemento) +
-                (elemento.equals(nodo.getElemento()) ? 1 : 0)) : 0;
+                        (elemento.equals(nodo.getElemento()) ? 1 : 0)) : 0;
     }
 
     public boolean esCapicua() {
@@ -334,6 +334,26 @@ public class Lista {
 
     public void cut(int i) {
         cut(i, this.longitud + 1);
+    }
+
+    public void agregarElem(Object nuevo, int x) {
+        if (this.longitud > 0) {
+            Nodo aux = new Nodo(nuevo, this.cabecera);
+            this.cabecera = aux;
+            this.longitud += this.longitud % x;
+            int valor = 0;
+            while (aux != null) {
+                if (valor == x ) {
+                    Nodo aux2 = new Nodo(nuevo, aux.getEnlace());
+                    aux.setEnlace(aux2);
+                    this.longitud++;
+                    valor = 0;
+                } else {
+                    valor++;
+                }
+                aux = aux.getEnlace();
+            }
+        }
     }
 
 }
