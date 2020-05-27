@@ -65,36 +65,22 @@ public class MixLineales {
     }
 
     public static Lista generarSecuencia(Cola q, int t) {
-        Cola clon = q.clone();
+        Cola cola = q.clone();
         Lista lista = new Lista();
-        Cola cola = new Cola();
-        Pila pila = new Pila();
         Object elemento;
-        int i;
-        int longitud = 1;
-        while (!clon.esVacia()) {
-            i = 1;
-            while (!clon.esVacia() && i % (t + 1) != 0) {
-                elemento = clon.obtenerFrente();
-                pila.apilar(elemento);
-                cola.poner(elemento);
-                clon.sacar();
+        int ext = 1, i = 0, r = 1;
+        while (!cola.esVacia()) {
+            i += 2;
+            elemento = cola.obtenerFrente();
+            lista.insertar(elemento, r);
+            lista.insertar(elemento, i);
+            cola.sacar();
+            if (ext % t == 0 && !cola.esVacia()) {
                 i++;
+                lista.insertar('$', i);
+                r = i + 1;
             }
-            while (!pila.esVacia()) {
-                lista.insertar(pila.obtenerTope(), longitud);
-                pila.desapilar();
-                longitud++;
-            }
-            while (!cola.esVacia()) {
-                lista.insertar(cola.obtenerFrente(), longitud);
-                cola.sacar();
-                longitud++;
-            }
-            if (!clon.esVacia()) {
-                lista.insertar('$', longitud);
-                longitud++;
-            }
+            ext++;
         }
         return lista;
     }
@@ -159,8 +145,10 @@ public class MixLineales {
         casoBalance(cola, "){ 5 + [ 8 * 9 -( 4 / 2 ) + 7 ] -1 }");
         casoBalance(cola, "{ 5} + [ 8 * 9 -( 4 / 2 ) + 7 ] -1 }");
         generarCola(cola, "1234568");
+        int n = 1;
         System.out.println("cola: " + cola);
-        System.out.println("list: " + generarSecuencia(cola, 3));
+        System.out.println("con valor: " + n);
+        System.out.println("list: " + generarSecuencia(cola, n));
     }
 
 }
