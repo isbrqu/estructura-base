@@ -85,25 +85,27 @@ public class PruebaLista {
 
     public static int contarIterativo(Lista lista, Object x) {
         int cont = 0;
-        int len = lista.longitud();
-        for (int i = 1; i <= len; i++) {
-            if (lista.recuperar(i).equals(x))
+        Lista clon = lista.clone();
+        while (!clon.esVacia()) {
+            if (clon.recuperar(1).equals(x))
                 cont++;
+            clon.eliminar(1);
         }
         return cont;
     }
 
     public static int contarRecursivo(Lista lista, Object x) {
-        return contarRecursivo(lista, x, 1);
+        Lista clon = lista.clone();
+        return contarRecursivoAux(clon, x);
     }
 
-    public static int contarRecursivo(Lista lista, Object x, int i) {
+    public static int contarRecursivoAux(Lista lista, Object x) {
         int cont = 0;
-        if (i <= lista.longitud()) {
-            if (lista.recuperar(i).equals(x))
-                cont = contarRecursivo(lista, x, i + 1) + 1;
-            else
-                cont = contarRecursivo(lista, x, i + 1);
+        if (!lista.esVacia()) {
+            Object elemento = lista.recuperar(1);
+            lista.eliminar(1);
+            cont = contarRecursivoAux(lista, x) +
+                    (elemento.equals(x) ? 1 : 0);
         }
         return cont;
     }
@@ -144,8 +146,8 @@ public class PruebaLista {
         System.out.println("Interca: " + l1.intercalar(l2));
         System.out.println("capicua? " + esCapicua(l1));
         System.out.println("capicua? " + l1.esCapicua());
-        System.out.println("ContIte: " + l1.contarIterativo(2));
-        System.out.println("ContRec: " + l1.contarRecursivo(2));
+        System.out.println("ContIte: " + l1.contarIterativo(3));
+        System.out.println("ContRec: " + l1.contarRecursivo(3));
         System.out.println("Slice1 : " + l1.slice(2));
         System.out.println("Slice2 : " + l1.slice(2, 4));
         l1.cut(2);
