@@ -6,12 +6,6 @@ import lineales.dinamicas.Cola;
 
 public class PruebaLista {
 
-    public static void llenar(Lista lista, int[] arr) {
-        lista.vaciar();
-        for (int i = 0; i < arr.length; i++)
-            lista.insertar(arr[i], i + 1);
-    }
-
     public static Lista concatenar(Lista l1, Lista l2) {
         int len1 = l1.longitud();
         int len2 = l2.longitud();
