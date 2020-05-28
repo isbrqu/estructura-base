@@ -134,29 +134,4 @@ public class PruebaLista {
         return slice(lista, i, lista.longitud() + 1);
     }
 
-    public static void main(String[] args) {
-        Lista l1 = new Lista();
-        Lista l2 = new Lista();
-        int[] arr1 = {3, 3, 0, 3, 3};
-        int[] arr2 = {};
-        llenar(l1, arr1);
-        llenar(l2, arr2);
-        System.out.println("Lista 1: " + l1);
-        System.out.println("Lista 2: " + l2);
-        System.out.println("Interca: " + l1.intercalar(l2));
-        System.out.println("capicua? " + esCapicua(l1));
-        System.out.println("capicua? " + l1.esCapicua());
-        System.out.println("ContIte: " + l1.contarIterativo(3));
-        System.out.println("ContRec: " + l1.contarRecursivo(3));
-        System.out.println("Slice1 : " + l1.slice(2));
-        System.out.println("Slice2 : " + l1.slice(2, 4));
-        l1.cut(2);
-        System.out.println("Cut 1  : " + l1);
-        l1 = new Lista();
-        llenar(l1, arr1);
-        l1.cut(2, 4);
-        System.out.println("Cut 2  : " + l1);
-        l1 = new Lista();
-    }
-
 }
