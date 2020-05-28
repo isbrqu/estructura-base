@@ -6,7 +6,7 @@ import lineales.dinamicas.Pila;
 
 public class MixLineales {
 
-    public static Cola generarOtraCola(Cola cola) {
+    public static Cola generarCola(Cola cola) {
         Cola mix = new Cola();
         if (!cola.esVacia()) {
             Cola clon = cola.clone();
@@ -32,7 +32,7 @@ public class MixLineales {
         return mix;
     }
 
-    public static Cola generarOtraColaTriple(Cola cola) {
+    public static Cola generarColaTriple(Cola cola) {
         Cola mix = new Cola();
         if (!cola.esVacia()) {
             Cola clon = cola.clone();
@@ -153,51 +153,6 @@ public class MixLineales {
             clon.sacar();
         }
         return hayBalance;
-    }
-
-    public static void generarCola(Cola cola, String texto) {
-        cola.vaciar();
-        for (int i = 0; i < texto.length(); i++) 
-            cola.poner(texto.charAt(i));
-    }
-
-    public static void caso(Cola cola, String texto) {
-        generarCola(cola, texto);
-        System.out.println("texto: " + texto);
-        System.out.println("cola: " + cola);
-        Cola mix = generarOtraColaTriple(cola);
-        System.out.println("mixCola: " + mix + "\n");
-    }
-
-    public static void casoBalance(Cola cola, String texto) {
-        generarCola(cola, texto);
-        System.out.println("texto: " + texto);
-        System.out.println("cola: " + cola);
-        System.out.println("hay balance? " + verificarBalanceo(cola));
-    }
-
-    public static void main(String[] args) {
-        Cola cola = new Cola();
-        System.out.println("test generarOtraCola");
-        caso(cola, "");
-        caso(cola, "A");
-        caso(cola, "A$B");
-        caso(cola, "A$BA$B");
-        caso(cola, "A$B$C$D$E$F");
-        caso(cola, "AB$C$DEF");
-        System.out.println("test verificarBalance");
-        casoBalance(cola, "[()]");
-        casoBalance(cola, "{5+[8*9-(4/2)+7]-1}");
-        casoBalance(cola, "{ 5 + [ 8 * 9 -( 4 / 2  + 7 ] -1 }");
-        casoBalance(cola, "{ 5 + [ 8 * 9 -( 4 / 2  + 7 ] )-1 }");
-        casoBalance(cola, "){ 5 + [ 8 * 9 -( 4 / 2 ) + 7 ] -1 }");
-        casoBalance(cola, "{ 5} + [ 8 * 9 -( 4 / 2 ) + 7 ] -1 }");
-        generarCola(cola, "1234568");
-        int n = 1;
-        System.out.println("cola: " + cola);
-        System.out.println("con valor: " + n);
-        System.out.println("list: " + generarSecuencia(cola, n));
-        System.out.println("expr: " + generarSecuenciaExpress(cola, n));
     }
 
 }
