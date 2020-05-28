@@ -95,11 +95,19 @@ public class MixLineales {
             // realizo conversion Object->char->String para poder utilizar contains
             elemento = Character.toString((char) clon.obtenerFrente());
             if ("([{".contains(elemento)) {
+                if (!pila.esVacia()) {
+                    tope = pila.obtenerTope();
+                    hayBalance =
+                            (tope.equals("(") && elemento.equals("(")) ||
+                            (tope.equals("[") && !elemento.equals("{")) ||
+                            tope.equals("{");
+                }
                 pila.apilar(elemento);
             } else if (")]}".contains(elemento)) {
                 if (!pila.esVacia()) {
                     tope = pila.obtenerTope();
-                    hayBalance = (tope.equals("(") && elemento.equals(")")) ||
+                    hayBalance =
+                            (tope.equals("(") && elemento.equals(")")) ||
                             (tope.equals("[") && elemento.equals("]")) ||
                             (tope.equals("{") && elemento.equals("}"));
                     pila.desapilar();
@@ -143,6 +151,7 @@ public class MixLineales {
         caso(cola, "A$B$C$D$E$F");
         caso(cola, "AB$C$DEF");
         System.out.println("test verificarBalance");
+        casoBalance(cola, "[()]");
         casoBalance(cola, "{5+[8*9-(4/2)+7]-1}");
         casoBalance(cola, "{ 5 + [ 8 * 9 -( 4 / 2  + 7 ] -1 }");
         casoBalance(cola, "{ 5 + [ 8 * 9 -( 4 / 2  + 7 ] )-1 }");
