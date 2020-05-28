@@ -85,6 +85,41 @@ public class MixLineales {
         return lista;
     }
 
+    public static Lista generarSecuenciaExpress(Cola q, int t) {
+        Cola cola = q.clone();
+        Lista lista = new Lista();
+        Pila pila = new Pila();
+        Pila rever = new Pila();
+        Object elemento;
+        int i = 1;
+        while (!cola.esVacia()) {
+            pila.apilar(cola.obtenerFrente());
+            cola.sacar();
+            if (i % t == 0 && !cola.esVacia())
+                pila.apilar('$');
+            i++;
+        }
+        while (!pila.esVacia()) {
+            elemento = pila.obtenerTope();
+            if (elemento.equals('$')) {
+                while (!rever.esVacia()) {
+                    lista.insertar(rever.obtenerTope(), 1);
+                    rever.desapilar();
+                }
+                lista.insertar('$', 1);
+            } else {
+                lista.insertar(elemento, 1);
+                rever.apilar(elemento);
+            }
+            pila.desapilar();
+        }
+        while (!rever.esVacia()) {
+            lista.insertar(rever.obtenerTope(), 1);
+            rever.desapilar();
+        }
+        return lista;
+    }
+
     public static boolean verificarBalanceo(Cola q) {
         Cola clon = q.clone();
         Pila pila = new Pila();
@@ -162,6 +197,7 @@ public class MixLineales {
         System.out.println("cola: " + cola);
         System.out.println("con valor: " + n);
         System.out.println("list: " + generarSecuencia(cola, n));
+        System.out.println("expr: " + generarSecuenciaExpress(cola, n));
     }
 
 }
