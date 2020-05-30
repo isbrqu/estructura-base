@@ -85,6 +85,38 @@ public class MixLineales {
         return lista;
     }
 
+    public static Cola listaToCola(Lista orig, int t) {
+        Lista lista = orig.clone();
+        Cola cola = new Cola();
+        Pila pila1 = new Pila();
+        Pila pila2 = new Pila();
+        Object elemento;
+        int i = 1;
+        while (!lista.esVacia()) {
+            elemento = lista.recuperar(1);
+            cola.poner(elemento);
+            pila1.apilar(elemento);
+            pila2.apilar(elemento);
+            lista.eliminar(1);
+            if (i % t == 0 || lista.esVacia()) {
+                while (!pila1.esVacia()) {
+                    cola.poner(pila1.obtenerTope());
+                    pila1.desapilar();
+                }
+                while (!pila2.esVacia()) {
+                    cola.poner(pila2.obtenerTope());
+                    pila2.desapilar();
+                }
+                if (!lista.esVacia()) {
+                    cola.poner('&');
+                    cola.poner('&');
+                }
+            }
+            i++;
+        }
+        return cola;
+    }
+
     public static Lista generarSecuenciaExpress(Cola q, int t) {
         Cola cola = q.clone();
         Lista lista = new Lista();
