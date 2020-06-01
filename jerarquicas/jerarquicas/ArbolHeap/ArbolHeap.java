@@ -113,7 +113,7 @@ public class ArbolHeap {
 
     @SuppressWarnings("rawtypes")
     public Comparable recuperarCima() {
-        return this.heap[this.ultimo];
+        return this.heap[1];
     }
 
     public boolean esVacio() {
