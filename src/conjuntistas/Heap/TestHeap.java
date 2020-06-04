@@ -2,25 +2,25 @@ package conjuntistas.Heap;
 
 public class TestHeap {
 
-    static String sOk = "\u001B[32m OK! \u001B[0m", sErr = " \u001B[31m ERROR \u001B[0m";
-    public static final String NEGRO = "\u001B[30m";
-    public static final String ROJO = "\u001B[31m";
-    public static final String VERDE = "\u001B[32m";
-    public static final String AMARILLO = "\u001B[33m";
-    public static final String AZUL = "\u001B[34m";
-    public static final String PURPLE = "\u001B[35m";
-    public static final String CYAN = "\u001B[36m";
-    public static final String BLANCO = "\u001B[37m";   
+    static String sOk = " OK", sErr = "ERROR";
+    public static final String NEGRO = "";
+    public static final String ROJO = "";
+    public static final String VERDE = "";
+    public static final String AMARILLO = "";
+    public static final String AZUL = "";
+    public static final String PURPLE = "";
+    public static final String CYAN = "";
+    public static final String BLANCO = ""; 
 
-   
-    public static final String ANSI_RED_BACKGROUND = "\u001B[41m";
-    public static final String ANSI_GREEN_BACKGROUND = "\u001B[42m";
-    public static final String ANSI_YELLOW_BACKGROUND = "\u001B[43m";
-    public static final String ANSI_BLUE_BACKGROUND = "\u001B[44m";
-    public static final String ANSI_PURPLE_BACKGROUND = "\u001B[45m";
-    public static final String ANSI_CYAN_BACKGROUND = "\u001B[46m";
-    public static final String ANSI_WHITE_BACKGROUND = "\u001B[47m";
-    public static final String RESET = "\u001B[0m";
+
+    public static final String ANSI_RED_BACKGROUND = "";
+    public static final String ANSI_GREEN_BACKGROUND = "";
+    public static final String ANSI_YELLOW_BACKGROUND = "";
+    public static final String ANSI_BLUE_BACKGROUND = "";
+    public static final String ANSI_PURPLE_BACKGROUND = "";
+    public static final String ANSI_CYAN_BACKGROUND = "";
+    public static final String ANSI_WHITE_BACKGROUND = "";
+    public static final String RESET = "";
 
     public static void main(String[] args){
 
@@ -52,7 +52,7 @@ public class TestHeap {
         System.out.println("Recupero cima de arbol, tiene que dar 10 " + ((  (int)a.recuperarCima()==10) ? sOk : sErr));
 
 
-        System.out.println("\nToString() deberia dar  \n 10: HI--> 15 HD--> 20,  \narbol.toString() =  " + a.toString());
+        System.out.println("\nToString() deberia dar  \n 10: HI--> 15 HD--> 20,  \narbol.toString() =  \n" + a);
 
 
         System.out.println("\nInserto el 16" + ((  a.insertar(16)) ? sOk : sErr));
