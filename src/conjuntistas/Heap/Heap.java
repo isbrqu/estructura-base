@@ -1,13 +1,13 @@
-package jerarquicas.ArbolHeap;
+package conjuntistas.Heap;
 
-public class ArbolHeap {
+public class Heap {
 
     private static final int TAMANIO = 10;
     @SuppressWarnings("rawtypes")
     private Comparable[] heap;
     private int ultimo = 0;
 
-    public ArbolHeap() {
+    public Heap() {
         this.heap = new Comparable[TAMANIO];
     }
 
@@ -118,6 +118,13 @@ public class ArbolHeap {
 
     public boolean esVacio() {
         return this.ultimo == 0;
+    }
+    
+    public Heap clone() {
+        Heap clon = new Heap();
+        clon.heap = this.heap.clone();
+        clon.ultimo = this.ultimo;
+        return clon;
     }
 
 }

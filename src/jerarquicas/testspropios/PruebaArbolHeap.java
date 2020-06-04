@@ -1,12 +1,12 @@
 package jerarquicas.testspropios;
 
-import jerarquicas.ArbolHeap.ArbolHeap;
+import conjuntistas.Heap.Heap;
 
 public class PruebaArbolHeap {
 
     public static void main(String[] args) {
 
-        ArbolHeap a = new ArbolHeap();
+        Heap a = new Heap();
 
         a.insertar(2);
         a.insertar(1);
