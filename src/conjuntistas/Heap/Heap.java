@@ -93,19 +93,18 @@ public class Heap {
         String s = "";
         int izq, der;
         for (int i = 1; i <= this.ultimo; i++) {
-            System.out.print("Nodo: " + this.heap[i] + " ");
+            s += "Nodo: " + this.heap[i] + " ";
             izq = i * 2;
             der = izq + 1;
             if (izq <= this.ultimo && this.heap[izq] != null) {
-                System.out.print("HI: " + this.heap[izq]);
+                s += "HI: " + this.heap[izq] + "\t";
             } else {
-                System.out.print("HI: -");
+                s += "HI: -\t";
             }
-            System.out.print("\t");
             if (der <= this.ultimo && this.heap[der] != null) {
-                System.out.println("HD: " + this.heap[der]);
+                s += "HD: " + this.heap[der] + "\n";
             } else {
-                System.out.println("HD: -");
+                s += "HD: -\n";
             }
         }
         return s;

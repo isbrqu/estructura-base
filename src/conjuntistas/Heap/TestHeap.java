@@ -12,7 +12,6 @@ public class TestHeap {
     public static final String CYAN = "";
     public static final String BLANCO = ""; 
 
-
     public static final String ANSI_RED_BACKGROUND = "";
     public static final String ANSI_GREEN_BACKGROUND = "";
     public static final String ANSI_YELLOW_BACKGROUND = "";
