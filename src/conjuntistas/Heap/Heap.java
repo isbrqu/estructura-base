@@ -5,10 +5,11 @@ public class Heap {
     private static final int TAMANIO = 10;
     @SuppressWarnings("rawtypes")
     private Comparable[] heap;
-    private int ultimo = 0;
+    private int ultimo;
 
     public Heap() {
         this.heap = new Comparable[TAMANIO];
+        this.ultimo = 0;
     }
 
     public boolean eliminarCima() {
@@ -89,6 +90,27 @@ public class Heap {
         }
     }
 
+    @SuppressWarnings("rawtypes")
+    public Comparable recuperarCima() {
+        return this.heap[1];
+    }
+
+    public boolean esVacio() {
+        return this.ultimo == 0;
+    }
+
+    public void vaciar() {
+        this.heap = new Comparable[TAMANIO];
+        this.ultimo = 0;
+    }
+
+    public Heap clone() {
+        Heap clon = new Heap();
+        clon.heap = this.heap.clone();
+        clon.ultimo = this.ultimo;
+        return clon;
+    }
+
     public String toString() {
         String s = "";
         int izq, der;
@@ -108,22 +130,6 @@ public class Heap {
             }
         }
         return s;
-    }
-
-    @SuppressWarnings("rawtypes")
-    public Comparable recuperarCima() {
-        return this.heap[1];
-    }
-
-    public boolean esVacio() {
-        return this.ultimo == 0;
-    }
-    
-    public Heap clone() {
-        Heap clon = new Heap();
-        clon.heap = this.heap.clone();
-        clon.ultimo = this.ultimo;
-        return clon;
     }
 
 }
