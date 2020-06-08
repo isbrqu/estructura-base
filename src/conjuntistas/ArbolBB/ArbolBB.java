@@ -81,6 +81,7 @@ public class ArbolBB {
     public Comparable minimoElem() {
         Comparable elemento = null;
         NodoABB nodo = this.raiz;
+        // bajada por la izquierda
         while (nodo != null) {
             elemento = nodo.getElemento();
             nodo = nodo.getIzquierdo();
@@ -91,6 +92,7 @@ public class ArbolBB {
     public Comparable maximoElem() {
         Comparable elemento = null;
         NodoABB nodo = this.raiz;
+        // bajada por la derecha
         while (nodo != null) {
             elemento = nodo.getElemento();
             nodo = nodo.getDerecho();
@@ -98,11 +100,13 @@ public class ArbolBB {
         return elemento;
     }
 
+    // copiado de arbol binario
     public String toString() {
         return (this.raiz != null) ? 
                 toStringAux(this.raiz, "") : "Arbol Vacio";
     }
 
+    // copiado de arbol binario
     private String toStringAux(NodoABB nodo, String s) {
         if (nodo != null) {
             s += "\n" + nodo.getElemento() + "\t";
@@ -125,15 +129,12 @@ public class ArbolBB {
     private void listarRangoAux(NodoABB nodo, Lista lista, int minimo, int maximo) {
         if (nodo != null) {
             Comparable elemento = nodo.getElemento();
-            if (elemento.compareTo(maximo) < 0) {
+            if (elemento.compareTo(maximo) < 0)
                 listarRangoAux(nodo.getDerecho(), lista, minimo, maximo);
-            }
-            if (elemento.compareTo(minimo) >= 0 && elemento.compareTo(maximo) <= 0) {
+            if (elemento.compareTo(minimo) >= 0 && elemento.compareTo(maximo) <= 0)
                 lista.insertar(elemento, 1);
-            }
-            if (elemento.compareTo(minimo) > 0) {
+            if (elemento.compareTo(minimo) > 0)
                 listarRangoAux(nodo.getIzquierdo(), lista, minimo, maximo);
-            }
         }
     }
 
@@ -176,6 +177,7 @@ public class ArbolBB {
         return true;
     }
 
+    // caso 1
     private void eliminarHoja(NodoABB hijo, NodoABB padre) {
         if (padre == null) {
             // caso especial un unico elemento
@@ -187,6 +189,7 @@ public class ArbolBB {
         }
     }
 
+    // caso 2
     private void eliminarConUnHijo(NodoABB hijo, NodoABB padre) {
         NodoABB izquierdo = hijo.getIzquierdo();
         NodoABB derecho = hijo.getDerecho();
@@ -200,27 +203,31 @@ public class ArbolBB {
         }
     }
 
-    private void eliminarConDosHijos(NodoABB hijo) {
-        NodoABB candidato = hijo.getDerecho();
-        NodoABB padreCandidato = hijo;
-        // obtengo el menor de los mayores
+    // caso 3
+    private void eliminarConDosHijos(NodoABB nodo) {
+        NodoABB candidato = nodo.getDerecho();
+        NodoABB padreCandidato = nodo;
+        // obtengo el menor de los mayores (candidato)
         while (candidato.getIzquierdo() != null) {
             padreCandidato = candidato;
             candidato = candidato.getIzquierdo();
         }
-        Comparable elemento = candidato.getElemento();
-        Comparable elementoDerecho = candidato.getDerecho();
-        if (hijo.getDerecho() == candidato) {
-            // caso especial el candidato es hijo
-            hijo.setElemento(elemento);
-            hijo.setDerecho(candidato.getDerecho());
+        // remplazo el valor del nodo a eliminar por el valor del candidato
+        nodo.setElemento(candidato.getElemento());
+        // hijo pude ser null o no
+        NodoABB hijoCandidato = candidato.getDerecho();
+        // elimina el nodo
+        // el candidato es el hijo derecho del nodo a eliminar?
+        if (nodo.getDerecho() == candidato) {
+            // caso especial, el candidato es hijo del nodo
+            nodo.setDerecho(hijoCandidato);
         } else {
-            // caso comun el candidato no es hijo
-            hijo.setElemento(elemento);
-            padreCandidato.setIzquierdo(candidato.getDerecho());
+            // caso comun, el candidato no es hijo del nodo
+            padreCandidato.setIzquierdo(hijoCandidato);
         }
     }
 
+    // utilidad, no prestar antencion
     public void llenar(int[] num) {
         for (int i = 0; i < num.length; i++) {
             insertar(num[i]);
