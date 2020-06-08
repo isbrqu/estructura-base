@@ -63,7 +63,7 @@ public class ArbolBB {
         Comparable elemento;
         while (nodo != null && !pertenece) {
             elemento = nodo.getElemento();
-            if (elemento.compareTo(x) == 0) {
+            if (elemento.equals(x)) {
                 pertenece = true;
             } else if (elemento.compareTo(x) > 0) {
                 nodo = nodo.getIzquierdo();
@@ -145,12 +145,14 @@ public class ArbolBB {
         boolean exito = false;
         if (nodo != null) {
             Comparable elemento = nodo.getElemento();
-            // System.out.print(elemento + ", ");
             if (elemento.equals(x)) {
+                // elimina el nodo
                 exito = eliminarNodo(nodo, padre, x);
             } else if (elemento.compareTo(x) > 0) {
+                // desciende por la izquierda del arbol (es menor)
                 exito = eliminarAux(nodo.getIzquierdo(), nodo, x);
             } else {
+                // desciende por la derecha del arbol (es mayor)
                 exito = eliminarAux(nodo.getDerecho(), nodo, x);
             }
         }
@@ -160,11 +162,15 @@ public class ArbolBB {
     private boolean eliminarNodo(NodoABB nodo, NodoABB padre, Comparable x) {
         NodoABB izquierdo = nodo.getIzquierdo();
         NodoABB derecho = nodo.getDerecho();
+        // determino el caso a eliminar
         if (izquierdo == null && derecho == null) {
+            // elimino un nodo hoja (sin hijos)
             eliminarHoja(nodo, padre);
         } else if (izquierdo != null && derecho != null) {
+            // elimino un nodo con dos hijos
             eliminarConDosHijos(nodo);
         } else {
+            // elimino un nodo con un hijo, uno izquiedo o derecho, pero no ambos
             eliminarConUnHijo(nodo, padre);
         }
         return true;
@@ -172,6 +178,7 @@ public class ArbolBB {
 
     private void eliminarHoja(NodoABB hijo, NodoABB padre) {
         if (padre == null) {
+            // caso especial un unico elemento
             this.raiz = null;
         } else if (padre.getIzquierdo() == hijo) {
             padre.setIzquierdo(null);
@@ -184,6 +191,7 @@ public class ArbolBB {
         NodoABB izquierdo = hijo.getIzquierdo();
         NodoABB derecho = hijo.getDerecho();
         if (padre == null) {
+            // caso especial de la raiz con un hijo
             this.raiz = (izquierdo != null) ? izquierdo : derecho;
         } else if (izquierdo != null) {
             padre.setIzquierdo(izquierdo);
@@ -195,6 +203,7 @@ public class ArbolBB {
     private void eliminarConDosHijos(NodoABB hijo) {
         NodoABB candidato = hijo.getDerecho();
         NodoABB padreCandidato = hijo;
+        // obtengo el menor de los mayores
         while (candidato.getIzquierdo() != null) {
             padreCandidato = candidato;
             candidato = candidato.getIzquierdo();
@@ -202,9 +211,11 @@ public class ArbolBB {
         Comparable elemento = candidato.getElemento();
         Comparable elementoDerecho = candidato.getDerecho();
         if (hijo.getDerecho() == candidato) {
+            // caso especial el candidato es hijo
             hijo.setElemento(elemento);
             hijo.setDerecho(candidato.getDerecho());
         } else {
+            // caso comun el candidato no es hijo
             hijo.setElemento(elemento);
             padreCandidato.setIzquierdo(candidato.getDerecho());
         }
