@@ -106,10 +106,10 @@ public class ArbolBB {
     private String toStringAux(NodoABB nodo, String s) {
         if (nodo != null) {
             s += "\n" + nodo.getElemento() + "\t";
-            NodoABB izq = nodo.getIzquierdo();
-            NodoABB der = nodo.getDerecho();
-            s += "HI: " + ((izq != null) ? izq.getElemento() : "-") + "\t" 
-                    + "HD: " + ((der != null) ? der.getElemento() : "-");
+            NodoABB izquierdo = nodo.getIzquierdo();
+            NodoABB derecho = nodo.getDerecho();
+            s += "HI: " + ((izquierdo != null) ? izquierdo.getElemento() : "-") + "\t" 
+                    + "HD: " + ((derecho != null) ? derecho.getElemento() : "-");
             s = toStringAux(nodo.getIzquierdo(), s);
             s = toStringAux(nodo.getDerecho(), s);
         }
@@ -125,7 +125,6 @@ public class ArbolBB {
     private void listarRangoAux(NodoABB nodo, Lista lista, int minimo, int maximo) {
         if (nodo != null) {
             Comparable elemento = nodo.getElemento();
-            System.out.println(elemento + ", ");
             if (elemento.compareTo(maximo) < 0) {
                 listarRangoAux(nodo.getDerecho(), lista, minimo, maximo);
             }
@@ -137,5 +136,84 @@ public class ArbolBB {
             }
         }
     }
-   
+
+    public boolean eliminar(Comparable x) {
+        return eliminarAux(this.raiz, null, x);
+    }
+
+    private boolean eliminarAux(NodoABB nodo, NodoABB padre, Comparable x) {
+        boolean exito = false;
+        if (nodo != null) {
+            Comparable elemento = nodo.getElemento();
+            // System.out.print(elemento + ", ");
+            if (elemento.equals(x)) {
+                exito = eliminarNodo(nodo, padre, x);
+            } else if (elemento.compareTo(x) > 0) {
+                exito = eliminarAux(nodo.getIzquierdo(), nodo, x);
+            } else {
+                exito = eliminarAux(nodo.getDerecho(), nodo, x);
+            }
+        }
+        return exito;
+    }
+
+    private boolean eliminarNodo(NodoABB nodo, NodoABB padre, Comparable x) {
+        NodoABB izquierdo = nodo.getIzquierdo();
+        NodoABB derecho = nodo.getDerecho();
+        if (izquierdo == null && derecho == null) {
+            eliminarHoja(nodo, padre);
+        } else if (izquierdo != null && derecho != null) {
+            eliminarConDosHijos(nodo);
+        } else {
+            eliminarConUnHijo(nodo, padre);
+        }
+        return true;
+    }
+
+    private void eliminarHoja(NodoABB hijo, NodoABB padre) {
+        if (padre == null) {
+            this.raiz = null;
+        } else if (padre.getIzquierdo() == hijo) {
+            padre.setIzquierdo(null);
+        } else {
+            padre.setDerecho(null);
+        }
+    }
+
+    private void eliminarConUnHijo(NodoABB hijo, NodoABB padre) {
+        NodoABB izquierdo = hijo.getIzquierdo();
+        NodoABB derecho = hijo.getDerecho();
+        if (padre == null) {
+            this.raiz = (izquierdo != null) ? izquierdo : derecho;
+        } else if (izquierdo != null) {
+            padre.setIzquierdo(izquierdo);
+        } else {
+            padre.setDerecho(derecho);
+        }
+    }
+
+    private void eliminarConDosHijos(NodoABB hijo) {
+        NodoABB candidato = hijo.getDerecho();
+        NodoABB padreCandidato = hijo;
+        while (candidato.getIzquierdo() != null) {
+            padreCandidato = candidato;
+            candidato = candidato.getIzquierdo();
+        }
+        Comparable elemento = candidato.getElemento();
+        Comparable elementoDerecho = candidato.getDerecho();
+        if (hijo.getDerecho() == candidato) {
+            hijo.setElemento(elemento);
+            hijo.setDerecho(candidato.getDerecho());
+        } else {
+            hijo.setElemento(elemento);
+            padreCandidato.setIzquierdo(candidato.getDerecho());
+        }
+    }
+
+    public void llenar(int[] num) {
+        for (int i = 0; i < num.length; i++) {
+            insertar(num[i]);
+        }
+    }
+
 }
