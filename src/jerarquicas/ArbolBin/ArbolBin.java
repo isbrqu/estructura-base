@@ -154,9 +154,9 @@ public class ArbolBin {
         return nivel;
     }
 
-    // solo busca el padre del nodo raiz
     public Object padre(Object elemento) {
-        return padreAux(this.raiz, elemento);
+        return (this.raiz == null || this.raiz.getElemento().equals(elemento)) ? 
+                null : padreAux(this.raiz, elemento);
     }
 
     private Object padreAux(NodoArbol nodo, Object elemento) {
@@ -196,9 +196,9 @@ public class ArbolBin {
             NodoArbol izq = nodo.getIzquierdo();
             NodoArbol der = nodo.getDerecho();
             s += "HI: " + ((izq != null) ? izq.getElemento() : "-") + "\t" 
-                    + "HD: " + ((der != null) ? der.getElemento() : "-");
-            s = toStringAux(nodo.getIzquierdo(), s);
-            s = toStringAux(nodo.getDerecho(), s);
+               + "HD: " + ((der != null) ? der.getElemento() : "-");
+            s = toStringAux(izq, s);
+            s = toStringAux(der, s);
         }
         return s;
     }
@@ -218,6 +218,30 @@ public class ArbolBin {
                 fronteraAux(nodo.getIzquierdo(), lista);
             }
         }
+    }
+
+    public Lista ancestros(Object elemento) {
+        Lista lista = new Lista();
+        ancestrosAux(this.raiz, lista, elemento);
+        // dependiendo de la salida que se desea se invierte o no
+        lista.invertir();
+        return lista;
+    }
+
+    public boolean ancestrosAux(NodoArbol nodo, Lista lista, Object elemento) {
+        boolean encontrado = false;
+        if (nodo != null) {
+            if (nodo.getElemento().equals(elemento)) {
+                encontrado = true;
+            } else if (ancestrosAux(nodo.getIzquierdo(), lista, elemento) || ancestrosAux(nodo.getDerecho(), lista, elemento)) {
+                // verifica si se encuentra a la izquierda, aprovecho el corto circuito para en caso de que este, no se busque
+                // caso contraria se ejecutara el siguiente llamado recursivo
+                // la condicion diria de forma coloquial: se encuentra a la izquierda o a la derecha del nodo actual?
+                lista.insertar(nodo.getElemento(), 1);
+                encontrado = true;
+            }
+        }
+        return encontrado;
     }
 
 }
