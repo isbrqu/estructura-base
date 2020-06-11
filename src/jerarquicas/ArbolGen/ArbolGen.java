@@ -100,22 +100,22 @@ public class ArbolGen {
         return encontrado;
     }
 
-//    private boolean ancestrosAux(NodoGen nodo, Lista lista, Object elemento) {
-//        boolean encontrado = false;
-//        if (nodo != null) {
-//            if (nodo.getElemento().equals(elemento)) {
-//                encontrado = true;
-//            } else {
-//                encontrado = ancestrosAux(nodo.getHijoIzquierdo(), lista, elemento);
-//                if (encontrado) {
-//                    lista.insertar(nodo.getElemento(), 1);
-//                } else {
-//                    encontrado = ancestrosAux(nodo.getHermanoDerecho(), lista, elemento);
-//                }
-//            }
-//        }
-//        return encontrado;
-//    }
+    private boolean ancestrosAuxx(NodoGen nodo, Lista lista, Object elemento) {
+        boolean encontrado = false;
+        if (nodo != null) {
+            if (nodo.getElemento().equals(elemento)) {
+                encontrado = true;
+            } else {
+                encontrado = ancestrosAux(nodo.getHijoIzquierdo(), lista, elemento);
+                if (encontrado) {
+                    lista.insertar(nodo.getElemento(), 1);
+                } else {
+                    encontrado = ancestrosAux(nodo.getHermanoDerecho(), lista, elemento);
+                }
+            }
+        }
+        return encontrado;
+    }
 
     public int altura() {
         return alturaAux(this.raiz, -1);
