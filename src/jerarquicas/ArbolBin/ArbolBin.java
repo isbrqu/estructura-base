@@ -156,7 +156,7 @@ public class ArbolBin {
 
     public Object padre(Object elemento) {
         return (this.raiz == null || this.raiz.getElemento().equals(elemento)) ? 
-                null : padreAux(this.raiz, elemento);
+        null : padreAux(this.raiz, elemento);
     }
 
     private Object padreAux(NodoArbol nodo, Object elemento) {
@@ -187,7 +187,7 @@ public class ArbolBin {
 
     public String toString() {
         return (this.raiz != null) ? 
-                toStringAux(this.raiz, "") : "Arbol Vacio";
+        toStringAux(this.raiz, "") : "Arbol Vacio";
     }
 
     public String toStringAux(NodoArbol nodo, String s) {
@@ -196,7 +196,7 @@ public class ArbolBin {
             NodoArbol izq = nodo.getIzquierdo();
             NodoArbol der = nodo.getDerecho();
             s += "HI: " + ((izq != null) ? izq.getElemento() : "-") + "\t" 
-               + "HD: " + ((der != null) ? der.getElemento() : "-");
+            + "HD: " + ((der != null) ? der.getElemento() : "-");
             s = toStringAux(izq, s);
             s = toStringAux(der, s);
         }
