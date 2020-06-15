@@ -148,7 +148,7 @@ public class ArbolBB {
             Comparable elemento = nodo.getElemento();
             if (elemento.equals(x)) {
                 // elimina el nodo
-                exito = eliminarNodo(nodo, padre, x);
+                exito = eliminarNodo(nodo, padre);
             } else if (elemento.compareTo(x) > 0) {
                 // desciende por la izquierda del arbol (es menor)
                 exito = eliminarAux(nodo.getIzquierdo(), nodo, x);
@@ -160,7 +160,7 @@ public class ArbolBB {
         return exito;
     }
 
-    private boolean eliminarNodo(NodoABB nodo, NodoABB padre, Comparable x) {
+    private boolean eliminarNodo(NodoABB nodo, NodoABB padre) {
         NodoABB izquierdo = nodo.getIzquierdo();
         NodoABB derecho = nodo.getDerecho();
         // determino el caso a eliminar
