@@ -1,6 +1,5 @@
 package conjuntistas.ArbolBB;
 import lineales.dinamicas.Lista;
-import lineales.dinamicas.Cola;
 
 public class ArbolBB {
 
