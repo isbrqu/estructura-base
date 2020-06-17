@@ -1,5 +1,6 @@
 package conjuntistas.ArbolBB;
 import lineales.dinamicas.Lista;
+import lineales.dinamicas.Cola;
 
 public class ArbolBB {
 
@@ -7,6 +8,31 @@ public class ArbolBB {
 
     public ArbolBB() {
         this.raiz = null;
+    }
+
+    public boolean esVacio() {
+        return this.raiz == null;
+    }
+
+    public void vaciar() {
+        this.raiz = null;
+    }
+
+    public boolean pertenece(Comparable x) {
+        boolean pertenece = false;
+        NodoABB nodo = this.raiz;
+        Comparable elemento;
+        while (nodo != null && !pertenece) {
+            elemento = nodo.getElemento();
+            if (elemento.equals(x)) {
+                pertenece = true;
+            } else if (elemento.compareTo(x) > 0) {
+                nodo = nodo.getIzquierdo();
+            } else {
+                nodo = nodo.getDerecho();
+            }
+        }
+        return pertenece;
     }
 
     public boolean insertar(Comparable elemento) {
@@ -22,7 +48,7 @@ public class ArbolBB {
     public boolean insertarAux(NodoABB nodo, Comparable elemento) {
         // precondicion: nodo no es nulo
         boolean exito = true;
-        if (elemento.compareTo(nodo.getElemento()) == 0) {
+        if (elemento.equals(nodo.getElemento())) {
             // reportar error: elemento repetido
             exito = false;
         } else if (elemento.compareTo(nodo.getElemento()) < 0) {
@@ -49,75 +75,12 @@ public class ArbolBB {
         return lista;
     }
 
-    public void listarAux(NodoABB nodo, Lista lista) {
+    private void listarAux(NodoABB nodo, Lista lista) {
         if (nodo != null) {
             listarAux(nodo.getDerecho(), lista);
             lista.insertar(nodo.getElemento(), 1);
             listarAux(nodo.getIzquierdo(), lista);
         }
-    }
-
-    public boolean pertenece(Comparable x) {
-        boolean pertenece = false;
-        NodoABB nodo = this.raiz;
-        Comparable elemento;
-        while (nodo != null && !pertenece) {
-            elemento = nodo.getElemento();
-            if (elemento.equals(x)) {
-                pertenece = true;
-            } else if (elemento.compareTo(x) > 0) {
-                nodo = nodo.getIzquierdo();
-            } else if (elemento.compareTo(x) < 0) {
-                nodo = nodo.getDerecho();
-            }
-        }
-        return pertenece;
-    }
-
-    public boolean esVacio() {
-        return this.raiz == null;
-    }
-
-    public Comparable minimoElem() {
-        Comparable elemento = null;
-        NodoABB nodo = this.raiz;
-        // bajada por la izquierda
-        while (nodo != null) {
-            elemento = nodo.getElemento();
-            nodo = nodo.getIzquierdo();
-        }
-        return elemento;
-    }
-
-    public Comparable maximoElem() {
-        Comparable elemento = null;
-        NodoABB nodo = this.raiz;
-        // bajada por la derecha
-        while (nodo != null) {
-            elemento = nodo.getElemento();
-            nodo = nodo.getDerecho();
-        }
-        return elemento;
-    }
-
-    // copiado de arbol binario
-    public String toString() {
-        return (this.raiz != null) ? 
-                toStringAux(this.raiz, "") : "Arbol Vacio";
-    }
-
-    // copiado de arbol binario
-    private String toStringAux(NodoABB nodo, String s) {
-        if (nodo != null) {
-            s += "\n" + nodo.getElemento() + "\t";
-            NodoABB izquierdo = nodo.getIzquierdo();
-            NodoABB derecho = nodo.getDerecho();
-            s += "HI: " + ((izquierdo != null) ? izquierdo.getElemento() : "-") + "\t" 
-                    + "HD: " + ((derecho != null) ? derecho.getElemento() : "-");
-            s = toStringAux(nodo.getIzquierdo(), s);
-            s = toStringAux(nodo.getDerecho(), s);
-        }
-        return s;
     }
 
     public Lista listarRango(int minimo, int maximo) {
@@ -136,6 +99,69 @@ public class ArbolBB {
             if (elemento.compareTo(minimo) > 0)
                 listarRangoAux(nodo.getIzquierdo(), lista, minimo, maximo);
         }
+    }
+
+    public Comparable minimo() {
+        Comparable elemento = null;
+        NodoABB nodo = this.raiz;
+        // bajada por la izquierda
+        while (nodo != null) {
+            elemento = nodo.getElemento();
+            nodo = nodo.getIzquierdo();
+        }
+        return elemento;
+    }
+
+    public Comparable maximo() {
+        Comparable elemento = null;
+        NodoABB nodo = this.raiz;
+        // bajada por la derecha
+        while (nodo != null) {
+            elemento = nodo.getElemento();
+            nodo = nodo.getDerecho();
+        }
+        return elemento;
+    }
+
+    public boolean eliminarMinimo() {
+        boolean exito = false;
+        if (this.raiz != null) {
+            NodoABB nodo = this.raiz;
+            NodoABB izquierdo = nodo.getIzquierdo();
+            if (izquierdo == null) {
+                // el nodo derecho puede ser null o no
+                this.raiz = nodo.getDerecho();
+            } else {
+                // bajo por la izquierda
+                while (izquierdo.getIzquierdo() != null) {
+                    nodo = izquierdo;
+                    izquierdo = nodo.getIzquierdo();
+                }
+                // el nodo derecho puede ser null o no
+                nodo.setIzquierdo(izquierdo.getDerecho());
+            }
+            exito = true;
+        }
+        return exito;
+    }
+
+    public boolean eliminarMaximo() {
+        boolean exito = false;
+        if (this.raiz != null) {
+            NodoABB nodo = this.raiz;
+            NodoABB derecho = nodo.getDerecho();
+            if (derecho == null) {
+                this.raiz = nodo.getIzquierdo();
+            } else {
+                while (derecho.getDerecho() != null) {
+                    nodo = derecho;
+                    derecho = nodo.getDerecho();
+                }
+                nodo.setDerecho(derecho.getIzquierdo());
+            }
+            exito = true;
+        }
+        return exito;
     }
 
     public boolean eliminar(Comparable x) {
@@ -191,15 +217,15 @@ public class ArbolBB {
 
     // caso 2
     private void eliminarConUnHijo(NodoABB hijo, NodoABB padre) {
-        NodoABB izquierdo = hijo.getIzquierdo();
-        NodoABB derecho = hijo.getDerecho();
+        // determino el nodo que tiene que reemplazar al hijo
+        NodoABB remplazo = (hijo.getIzquierdo() != null) ? hijo.getIzquierdo() : hijo.getDerecho();
         if (padre == null) {
             // caso especial de la raiz con un hijo
-            this.raiz = (izquierdo != null) ? izquierdo : derecho;
-        } else if (izquierdo != null) {
-            padre.setIzquierdo(izquierdo);
+            this.raiz = remplazo;
+        } else if (padre.getIzquierdo() == hijo) {
+            padre.setIzquierdo(remplazo);
         } else {
-            padre.setDerecho(derecho);
+            padre.setDerecho(remplazo);
         }
     }
 
@@ -227,11 +253,23 @@ public class ArbolBB {
         }
     }
 
-    // utilidad, no prestar antencion
-    public void llenar(int[] num) {
-        for (int i = 0; i < num.length; i++) {
-            insertar(num[i]);
+    // copiado de arbol binario
+    public String toString() {
+        return (this.raiz != null) ? toStringAux(this.raiz, "") : "Arbol Vacio";
+    }
+
+    // copiado de arbol binario
+    private String toStringAux(NodoABB nodo, String s) {
+        if (nodo != null) {
+            s += "\n" + nodo.getElemento() + "\t";
+            NodoABB izquierdo = nodo.getIzquierdo();
+            NodoABB derecho = nodo.getDerecho();
+            s += "HI: " + ((izquierdo != null) ? izquierdo.getElemento() : "-") + "\t"
+               + "HD: " + ((derecho != null) ? derecho.getElemento() : "-");
+            s = toStringAux(izquierdo, s);
+            s = toStringAux(derecho, s);
         }
+        return s;
     }
 
 }

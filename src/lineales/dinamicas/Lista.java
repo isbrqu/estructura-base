@@ -128,7 +128,7 @@ public class Lista {
     }
 
     public String toString() {
-        String s = "lista vacia";
+        String s = "lista vacía";
         if (this.cabecera != null) {
             Nodo aux = this.cabecera;
             s = "[";
