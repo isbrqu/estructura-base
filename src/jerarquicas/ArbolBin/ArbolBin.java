@@ -56,7 +56,7 @@ public class ArbolBin {
 
     private void posordenAux(NodoArbol nodo, Lista lista) {
         if (nodo != null) {
-            lista.insertar(nodo.getElemento(), 1);			
+            lista.insertar(nodo.getElemento(), 1);
             posordenAux(nodo.getDerecho(), lista);
             posordenAux(nodo.getIzquierdo(), lista);
         }
@@ -155,7 +155,7 @@ public class ArbolBin {
     }
 
     public Object padre(Object elemento) {
-        return (this.raiz == null || this.raiz.getElemento().equals(elemento)) ? 
+        return (this.raiz == null || this.raiz.getElemento().equals(elemento)) ?
         null : padreAux(this.raiz, elemento);
     }
 
@@ -182,11 +182,11 @@ public class ArbolBin {
     }
 
     private NodoArbol cloneAux(NodoArbol orig) {
-        return (orig == null) ? null : new NodoArbol(orig.getElemento(), cloneAux(orig.getIzquierdo()), cloneAux(orig.getDerecho()));  
+        return (orig == null) ? null : new NodoArbol(orig.getElemento(), cloneAux(orig.getIzquierdo()), cloneAux(orig.getDerecho()));
     }
 
     public String toString() {
-        return (this.raiz != null) ? 
+        return (this.raiz != null) ?
         toStringAux(this.raiz, "") : "Arbol Vacio";
     }
 
@@ -195,7 +195,7 @@ public class ArbolBin {
             s += "\n" + nodo.getElemento() + "\t";
             NodoArbol izq = nodo.getIzquierdo();
             NodoArbol der = nodo.getDerecho();
-            s += "HI: " + ((izq != null) ? izq.getElemento() : "-") + "\t" 
+            s += "HI: " + ((izq != null) ? izq.getElemento() : "-") + "\t"
             + "HD: " + ((der != null) ? der.getElemento() : "-");
             s = toStringAux(izq, s);
             s = toStringAux(der, s);
@@ -220,6 +220,7 @@ public class ArbolBin {
         }
     }
 
+    // metodo pedido
     public Lista ancestros(Object elemento) {
         Lista lista = new Lista();
         ancestrosAux(this.raiz, lista, elemento);
