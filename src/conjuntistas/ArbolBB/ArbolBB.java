@@ -249,6 +249,16 @@ public class ArbolBB {
         }
     }
 
+    public ArbolBB clone() {
+        ArbolBB clon = new ArbolBB();
+        clon.raiz = cloneAux(this.raiz);
+        return clon;
+    }
+
+    private NodoABB cloneAux(NodoABB orig) {
+        return (orig == null) ? null : new NodoABB(orig.getElemento(), cloneAux(orig.getIzquierdo()), cloneAux(orig.getDerecho()));
+    }
+
     // copiado de arbol binario
     public String toString() {
         return (this.raiz != null) ? toStringAux(this.raiz, "") : "Arbol Vacío";
