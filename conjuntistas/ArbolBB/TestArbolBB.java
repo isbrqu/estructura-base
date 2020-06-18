@@ -69,6 +69,7 @@ public class TestArbolBB {
         System.out.println("Resultado obtenido");
         System.out.println(a);
         System.out.println("vacío");
+        a.vaciar();
         System.out.println(a);
 
         cartel("Test Mínimo");
@@ -159,14 +160,14 @@ public class TestArbolBB {
         System.out.println("    [1]             [3]         [7]             [9]    ");
         llenar(a, num);
         System.out.println(a + "\n");
-        System.out.println("listar es igual a [1, 2, 3, 5, 7, 8, 9]: " + comprobar(a.listar().toString().equals("[1, 2, 3, 5, 7, 8, 9]")));
-        System.out.println("rango[1, 9] es igual a [1, 2, 3, 5, 7, 8, 9]: " + comprobar(a.listarRango(0, 9).toString().equals("[1, 2, 3, 5, 7, 8, 9]")));
-        System.out.println("rango[3, 7] es igual a [3, 5, 7]: " + comprobar(a.listarRango(3, 7).toString().equals("[3, 5, 7]")));
-        System.out.println("rango[1, 2] es igual a [1, 2]: " + comprobar(a.listarRango(1, 2).toString().equals("[1, 2]")));
-        System.out.println("rango[8, 9] es igual a [8, 9]: " + comprobar(a.listarRango(8, 9).toString().equals("[8, 9]")));
+        System.out.println("listar es igual a [1, 2, 3, 5, 7, 8, 9] --> " + a.listar());
+        System.out.println("rango[1, 9] es igual a [1, 2, 3, 5, 7, 8, 9] --> " + a.listarRango(0, 9));
+        System.out.println("rango[3, 7] es igual a [3, 5, 7] --> " + a.listarRango(3, 7));
+        System.out.println("rango[1, 2] es igual a [1, 2] --> " + a.listarRango(1, 2));
+        System.out.println("rango[8, 9] es igual a [8, 9] --> " + a.listarRango(8, 9));
         a.vaciar();
-        System.out.println("listar vacío de árbol vacío: " + comprobar(a.listar().toString().equals("lista vacía")));
-        System.out.println("rango vacío de árbol vacío: " + comprobar(a.listarRango(1, 9).toString().equals("lista vacía")));
+        System.out.println("listar vacío de árbol vacío --> " + a.listar());
+        System.out.println("rango vacío de árbol vacío --> " + a.listarRango(1, 9));
 
         cartel("Test pertenece");
         llenar(a, num);
