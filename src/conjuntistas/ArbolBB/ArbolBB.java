@@ -125,19 +125,16 @@ public class ArbolBB {
     public boolean eliminarMinimo() {
         boolean exito = false;
         if (this.raiz != null) {
-            NodoABB nodo = this.raiz;
-            NodoABB izquierdo = nodo.getIzquierdo();
-            if (izquierdo == null) {
-                // el nodo derecho puede ser null o no
-                this.raiz = nodo.getDerecho();
+            NodoABB padre = null;
+            NodoABB hijo = this.raiz;
+            while (hijo.getIzquierdo() != null) {
+                padre = hijo;
+                hijo = hijo.getIzquierdo();
+            }
+            if (padre == null) {
+                this.raiz = hijo.getDerecho();
             } else {
-                // bajo por la izquierda
-                while (izquierdo.getIzquierdo() != null) {
-                    nodo = izquierdo;
-                    izquierdo = nodo.getIzquierdo();
-                }
-                // el nodo derecho puede ser null o no
-                nodo.setIzquierdo(izquierdo.getDerecho());
+                padre.setIzquierdo(hijo.getDerecho());
             }
             exito = true;
         }
@@ -147,16 +144,16 @@ public class ArbolBB {
     public boolean eliminarMaximo() {
         boolean exito = false;
         if (this.raiz != null) {
-            NodoABB nodo = this.raiz;
-            NodoABB derecho = nodo.getDerecho();
-            if (derecho == null) {
-                this.raiz = nodo.getIzquierdo();
+            NodoABB padre = null;
+            NodoABB hijo = this.raiz;
+            while (hijo.getDerecho() != null) {
+                padre = hijo;
+                hijo = hijo.getDerecho();
+            }
+            if (padre == null) {
+                this.raiz = hijo.getIzquierdo();
             } else {
-                while (derecho.getDerecho() != null) {
-                    nodo = derecho;
-                    derecho = nodo.getDerecho();
-                }
-                nodo.setDerecho(derecho.getIzquierdo());
+                padre.setDerecho(hijo.getIzquierdo());
             }
             exito = true;
         }
@@ -254,7 +251,7 @@ public class ArbolBB {
 
     // copiado de arbol binario
     public String toString() {
-        return (this.raiz != null) ? toStringAux(this.raiz, "") : "Arbol Vacio";
+        return (this.raiz != null) ? toStringAux(this.raiz, "") : "Arbol Vacío";
     }
 
     // copiado de arbol binario
