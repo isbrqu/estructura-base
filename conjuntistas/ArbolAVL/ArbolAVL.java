@@ -77,12 +77,16 @@ public class ArbolAVL {
                 exito = eliminarAux(nodo.getDerecho(), nodo, x);
             }
         }
+        // apendice balanceador
         if (exito) {
+            // cuando no sea la raiz
             if (padre != null)
                 padre.recalcularAltura();
+            // solo para el elemento que se borro
+            // nodo no es null por más que se borre
             if (nodo != null) {
-                nodo.recalcularAltura();
                 balancear(nodo);
+                nodo.recalcularAltura();
             }
         }
         return exito;
@@ -296,8 +300,7 @@ public class ArbolAVL {
 
     // copiado de arbol binario
     public String toString() {
-        return (this.raiz != null) ? 
-                toStringAux(this.raiz, "") : "Arbol Vacio";
+        return (this.raiz != null) ? toStringAux(this.raiz, "") : "Arbol Vacio";
     }
 
     // copiado de arbol binario
@@ -306,7 +309,7 @@ public class ArbolAVL {
             s += "\n" + nodo.getElemento() + "\t";
             NodoAVL izquierdo = nodo.getIzquierdo();
             NodoAVL derecho = nodo.getDerecho();
-            s += "HI: " + ((izquierdo != null) ? izquierdo.getElemento() : "-") + "\t" 
+            s += "HI: " + ((izquierdo != null) ? izquierdo.getElemento() : "-") + "\t"
                     + "HD: " + ((derecho != null) ? derecho.getElemento() : "-");
             s = toStringAux(nodo.getIzquierdo(), s);
             s = toStringAux(nodo.getDerecho(), s);
