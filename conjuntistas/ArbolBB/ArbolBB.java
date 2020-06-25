@@ -341,6 +341,29 @@ public class ArbolBB {
         return exito;
     }
 
+    public Lista fronteraMayor(Comparable x) {
+        Lista lista = new Lista();
+        fronteraMayorAux(this.raiz, lista, x);
+        return lista;
+    }
+
+    private void fronteraMayorAux(NodoABB nodo, Lista lista, Comparable x) {
+        if (nodo != null) {
+            Comparable elemento = nodo.getElemento();
+            NodoABB izquierdo = nodo.getIzquierdo();
+            NodoABB derecho = nodo.getDerecho();
+            boolean mayor = (elemento.compareTo(x) > 0);
+            // es una hoja mayor?
+            if (izquierdo == null && derecho == null && mayor) {
+                lista.insertar(elemento, 1);
+            } else {
+                fronteraMayorAux(derecho, lista, x);
+                if (mayor)
+                    fronteraMayorAux(izquierdo, lista, x);
+            }
+        }
+    }
+
     public ArbolBB clone() {
         ArbolBB clon = new ArbolBB();
         clon.raiz = cloneAux(this.raiz);
