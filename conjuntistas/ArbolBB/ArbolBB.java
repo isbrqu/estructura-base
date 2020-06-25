@@ -284,7 +284,7 @@ public class ArbolBB {
     }
 
     public boolean eliminarMayores(Comparable x) {
-        return eliminarMayoresAux(this.raiz, null, lista, x);
+        return eliminarMayoresAux(this.raiz, null, x);
     }
 
     private boolean eliminarMayoresAux(NodoABB nodo, NodoABB padre, Comparable x) {
@@ -309,14 +309,14 @@ public class ArbolBB {
                 exito = eliminarMayoresAux(nodo.getDerecho(), nodo, x);
             }
         }
-        return exito
+        return exito;
     }
 
     public boolean eliminarMenores(Comparable x) {
-        return eliminarMenoresAux(this.raiz, null, lista, x);
+        return eliminarMenoresAux(this.raiz, null, x);
     }
 
-    private boolean eliminarMenoresAux(NodoABB nodo, Lista lista, Comparable x) {
+    private boolean eliminarMenoresAux(NodoABB nodo, NodoABB padre, Comparable x) {
         boolean exito = false;
         if (nodo != null) {
             Comparable elemento = nodo.getElemento();
@@ -338,7 +338,7 @@ public class ArbolBB {
                 exito = eliminarMayoresAux(nodo.getIzquierdo(), nodo, x);
             }
         }
-        return exito
+        return exito;
     }
 
     public ArbolBB clone() {
