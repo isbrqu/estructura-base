@@ -283,6 +283,64 @@ public class ArbolBB {
         }
     }
 
+    public boolean eliminarMayores(Comparable x) {
+        return eliminarMayoresAux(this.raiz, null, lista, x);
+    }
+
+    private boolean eliminarMayoresAux(NodoABB nodo, NodoABB padre, Comparable x) {
+        boolean exito = false;
+        if (nodo != null) {
+            Comparable elemento = nodo.getElemento();
+            if (elemento.compareTo(x) > 0) {
+                exito = true;
+                // bajo por la izquierda
+                NodoABB izquierdo = nodo.getIzquierdo();
+                if (padre == null) {
+                    // caso especial
+                    this.raiz = izquierdo;
+                    eliminarMayoresAux(izquierdo, null, x);
+                } else {
+                    // caso normal, todo lo que este a la derecha de nodo tambien es mayor a x
+                    padre.setDerecho(izquierdo);
+                    eliminarMayoresAux(izquierdo, padre, x);
+                }
+            } else {
+                // bajo por el derecho
+                exito = eliminarMayoresAux(nodo.getDerecho(), nodo, x);
+            }
+        }
+        return exito
+    }
+
+    public boolean eliminarMenores(Comparable x) {
+        return eliminarMenoresAux(this.raiz, null, lista, x);
+    }
+
+    private boolean eliminarMenoresAux(NodoABB nodo, Lista lista, Comparable x) {
+        boolean exito = false;
+        if (nodo != null) {
+            Comparable elemento = nodo.getElemento();
+            if (elemento.compareTo(x) < 0) {
+                exito = true;
+                // bajo por la izquierda
+                NodoABB derecho = nodo.getDerecho();
+                if (padre == null) {
+                    // caso especial
+                    this.raiz = derecho;
+                    eliminarMayoresAux(derecho, null, x);
+                } else {
+                    // caso normal, todo lo que este a la derecha de nodo tambien es mayor a x
+                    padre.setIzquierdo(derecho);
+                    eliminarMayoresAux(derecho, padre, x);
+                }
+            } else {
+                // bajo por el derecho
+                exito = eliminarMayoresAux(nodo.getIzquierdo(), nodo, x);
+            }
+        }
+        return exito
+    }
+
     public ArbolBB clone() {
         ArbolBB clon = new ArbolBB();
         clon.raiz = cloneAux(this.raiz);
