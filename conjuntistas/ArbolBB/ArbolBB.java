@@ -396,6 +396,37 @@ public class ArbolBB {
         return (orig == null) ? null : new NodoABB(orig.getElemento(), cloneAux(orig.getIzquierdo()), cloneAux(orig.getDerecho()));
     }
 
+    public ArbolBB cloneRange(Comparable minimo, Comparable maximo) {
+        ArbolBB arbol = new ArbolBB();
+        arbol.raiz = cloneRangeAux(this.raiz, minimo, maximo);
+        return arbol;
+    }
+
+    private NodoABB cloneRangeAux(NodoABB nodo, Comparable minimo, Comparable maximo) {
+        NodoABB clon = null;
+        if (nodo != null) {
+            Comparable elemento = nodo.getElemento();
+            NodoABB izquierdo = nodo.getIzquierdo();
+            NodoABB derecho = nodo.getDerecho();
+            NodoABB clonIzquierdo = null;
+            NodoABB clonDerecho = null;
+            if (elemento.compareTo(minimo) > 0) {
+                clonIzquierdo = cloneRangeAux(izquierdo, minimo, maximo);
+            }
+            if (elemento.compareTo(maximo) < 0) {
+                clonDerecho = cloneRangeAux(derecho, minimo, maximo);
+            }
+            if (elemento.compareTo(minimo) >= 0 && elemento.compareTo(maximo) <= 0) {
+                clon = new NodoABB(elemento, clonIzquierdo, clonDerecho);
+            } else if (clonIzquierdo != null) {
+                clon = clonIzquierdo;
+            } else {
+                clon = clonDerecho;
+            }
+        }
+        return clon;
+    }
+
     // copiado de arbol binario
     public String toString() {
         return (this.raiz != null) ? toStringAux(this.raiz, "") : "Arbol Vacío";

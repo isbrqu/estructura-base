@@ -43,29 +43,39 @@ public class TestArbolBBExtra {
         // System.out.println(a + "\n");
         // System.out.println("listar mayores: " + a.listarMenores(1));
 
-        int[] num = {4, 1, 0, 2, 8, 6, 5, 7, 9};
-        int[] ord = {0, 1, 2, 4, 5, 6, 7, 8, 9, 10, -1};
+        int[] num = {4, 2, 1, 3, 8, 6, 5, 7, 9};
+        int[] ord = {1, 2, 3, 4, 5, 6, 7, 8, 9};
         llenar(a, num);
         System.out.println("                           |-----------------------[4]-----------------------|                           ");
-        System.out.println("             |------------[1]------------|                     |------------[8]------------|             ");
-        System.out.println("     |------[0]------|           |------[2]------|     |------[6]------|           |------[9]------|     ");
+        System.out.println("             |------------[2]------------|                     |------------[8]------------|             ");
+        System.out.println("     |------[1]------|           |------[3]------|     |------[6]------|           |------[9]------|     ");
         System.out.println("    [-]             [-]         [-]             [-]   [5]             [7]         [-]             [-]    ");
-        System.out.println(a + "\n");
-        System.out.println();
-        int n;
+        int minimo, maximo;
         for (int i = 0; i < ord.length; i++) {
-            n = ord[i];
-            System.out.println("frontera mayor de: " + n);
-            System.out.println("lista: " + a.fronteraMayor(n));
+            for (int j = i; j < ord.length; j++) {
+                minimo = ord[i];
+                maximo = ord[j];
+                System.out.println();
+                System.out.println("Clon Rango [" + minimo + ", " + maximo + "]");
+                System.out.println(a.cloneRange(minimo, maximo));
+                System.out.println();
+            }
             System.out.println();
         }
-        System.out.println();
-        for (int j = ord.length - 1; j >= 0; j--) {
-            n = ord[j];
-            System.out.println("frontera menor de: " + n);
-            System.out.println("lista: " + a.fronteraMenor(n));
-            System.out.println();
-        }
+        // int n;
+        // for (int i = 0; i < ord.length; i++) {
+        //     n = ord[i];
+        //     System.out.println("frontera mayor de: " + n);
+        //     System.out.println("lista: " + a.fronteraMayor(n));
+        //     System.out.println();
+        // }
+        // System.out.println();
+        // for (int j = ord.length - 1; j >= 0; j--) {
+        //     n = ord[j];
+        //     System.out.println("frontera menor de: " + n);
+        //     System.out.println("lista: " + a.fronteraMenor(n));
+        //     System.out.println();
+        // }
     }
 
 }
