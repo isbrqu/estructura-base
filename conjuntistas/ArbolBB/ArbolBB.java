@@ -363,6 +363,29 @@ public class ArbolBB {
         }
     }
 
+    public Lista fronteraMenor(Comparable x) {
+        Lista lista = new Lista();
+        fronteraMenor(this.raiz, lista, x);
+        return lista;
+    }
+
+    private void fronteraMenor(NodoABB nodo, Lista lista, Comparable x) {
+        if (nodo != null) {
+            Comparable elemento = nodo.getElemento();
+            NodoABB izquierdo = nodo.getIzquierdo();
+            NodoABB derecho = nodo.getDerecho();
+            System.out.print(elemento + ", ");
+            if (elemento.compareTo(x) < 0) {
+                if (izquierdo == null && derecho == null) {
+                    lista.insertar(elemento, 1);
+                } else {
+                    fronteraMenor(derecho, lista, x);
+                }
+            }
+            fronteraMenor(izquierdo, lista, x);
+        }
+    }
+
     public ArbolBB clone() {
         ArbolBB clon = new ArbolBB();
         clon.raiz = cloneAux(this.raiz);
