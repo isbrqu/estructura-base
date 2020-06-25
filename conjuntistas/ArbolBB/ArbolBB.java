@@ -249,6 +249,40 @@ public class ArbolBB {
         }
     }
 
+    public Lista listarMayor(Comparable x) {
+        Lista lista = new Lista();
+        listarMayorAux(this.raiz, lista, x);
+        return lista;
+    }
+
+    private void listarMayorAux(NodoABB nodo, Lista lista, Comparable x) {
+        if (nodo != null) {
+            Comparable elemento = nodo.getElemento();
+            listarMayorAux(nodo.getDerecho(), lista, x);
+            if (x.compareTo(elemento) < 0) {
+                lista.insertar(elemento, 1);
+                listarMayorAux(nodo.getIzquierdo(), lista, x);
+            }
+        }
+    }
+
+    public Lista listarMenor(Comparable x) {
+        Lista lista = new Lista();
+        listarMenorAux(this.raiz, lista, x);
+        return lista;
+    }
+
+    private void listarMenorAux(NodoABB nodo, Lista lista, Comparable x) {
+        if (nodo != null) {
+            Comparable elemento = nodo.getElemento();
+            listarMenorAux(nodo.getIzquierdo(), lista, x);
+            if (x.compareTo(elemento) > 0) {
+                lista.insertar(elemento, 1);
+                listarMenorAux(nodo.getDerecho(), lista, x);
+            }
+        }
+    }
+
     public ArbolBB clone() {
         ArbolBB clon = new ArbolBB();
         clon.raiz = cloneAux(this.raiz);
