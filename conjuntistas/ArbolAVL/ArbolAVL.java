@@ -29,7 +29,6 @@ public class ArbolAVL {
         NodoAVL izquierdo = nodo.getIzquierdo();
         NodoAVL derecho = nodo.getDerecho();
         Comparable contenido = nodo.getElemento();
-
         if (elemento.equals(contenido)) {
             // reportar error: elemento repetido
             exito = false;
@@ -309,8 +308,8 @@ public class ArbolAVL {
             s += "\n" + nodo.getElemento() + "\t";
             NodoAVL izquierdo = nodo.getIzquierdo();
             NodoAVL derecho = nodo.getDerecho();
-            s += "HI: " + ((izquierdo != null) ? izquierdo.getElemento() : "-") + "\t"
-                    + "HD: " + ((derecho != null) ? derecho.getElemento() : "-");
+            s += "HI: " + ((izquierdo != null) ? izquierdo.getElemento() : "-") + "\t";
+            s += "HD: " + ((derecho != null) ? derecho.getElemento() : "-");
             s = toStringAux(nodo.getIzquierdo(), s);
             s = toStringAux(nodo.getDerecho(), s);
         }
