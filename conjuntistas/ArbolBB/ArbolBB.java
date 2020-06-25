@@ -352,14 +352,13 @@ public class ArbolBB {
             Comparable elemento = nodo.getElemento();
             NodoABB izquierdo = nodo.getIzquierdo();
             NodoABB derecho = nodo.getDerecho();
-            boolean mayor = (elemento.compareTo(x) > 0);
-            // es una hoja mayor?
-            if (izquierdo == null && derecho == null && mayor) {
-                lista.insertar(elemento, 1);
-            } else {
-                fronteraMayorAux(derecho, lista, x);
-                if (mayor)
+            fronteraMayorAux(derecho, lista, x);
+            if (elemento.compareTo(x) > 0) {
+                if (izquierdo == null && derecho == null) {
+                    lista.insertar(elemento, 1);
+                } else {
                     fronteraMayorAux(izquierdo, lista, x);
+                }
             }
         }
     }
