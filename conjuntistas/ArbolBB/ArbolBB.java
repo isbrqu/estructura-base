@@ -182,7 +182,7 @@ public class ArbolBB {
         return exito;
     }
 
-    private boolean eliminarNodo(NodoABB nodo, NodoABB padre) {
+    protected boolean eliminarNodo(NodoABB nodo, NodoABB padre) {
         NodoABB izquierdo = nodo.getIzquierdo();
         NodoABB derecho = nodo.getDerecho();
         // determino el caso a eliminar

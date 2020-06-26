@@ -1,9 +1,9 @@
 package conjuntistas.ArbolBB;
 import lineales.dinamicas.Lista;
 
-public class ArbolBBP extends ArbolBB {
+public class ArbolBBE extends ArbolBB {
 
-    public ArbolBBP() {
+    public ArbolBBE() {
         super();
     }
 
@@ -80,7 +80,6 @@ public class ArbolBBP extends ArbolBB {
             Comparable elemento = nodo.getElemento();
             NodoABB izquierdo = nodo.getIzquierdo();
             NodoABB derecho = nodo.getDerecho();
-            System.out.print(elemento + ", ");
             if (elemento.compareTo(x) < 0) {
                 if (izquierdo == null && derecho == null) {
                     lista.insertar(elemento, 1);
