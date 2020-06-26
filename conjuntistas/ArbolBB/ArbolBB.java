@@ -341,6 +341,27 @@ public class ArbolBB {
         return exito;
     }
 
+    public boolean eliminarRango(Comparable minimo, Comparable maximo) {
+        return eliminarRangoAux(this.raiz, null, minimo, maximo);
+    }
+
+    private boolean eliminarRangoAux(NodoABB nodo, NodoABB padre, Comparable minimo, Comparable maximo) {
+        boolean exito = false;
+        if (nodo != null) {
+            Comparable elemento = nodo.getElemento();
+            if (elemento.compareTo(minimo) > 0 && nodo.getIzquierdo() != null) {
+                exito = eliminarRangoAux(nodo.getIzquierdo(), nodo, minimo, maximo);
+            }
+            if (elemento.compareTo(maximo) < 0 && nodo.getDerecho() != null) {
+                exito = eliminarRangoAux(nodo.getDerecho(), nodo, minimo, maximo);
+            }
+            if (elemento.compareTo(minimo) >= 0 && elemento.compareTo(maximo) <= 0) {
+                exito = eliminarNodo(nodo, padre);
+            }
+        }
+        return exito;
+    }
+
     public Lista fronteraMayor(Comparable x) {
         Lista lista = new Lista();
         fronteraMayorAux(this.raiz, lista, x);
