@@ -12,7 +12,7 @@ public class TestArbolBBExtra extends TestArbolBB {
         System.out.println("             |------------[2]------------|                     |------------[8]------------|             ");
         System.out.println("     |------[1]------|           |------[3]------|     |------[6]------|           |------[9]------|     ");
         System.out.println("    [-]             [-]         [-]             [-]   [5]             [7]         [-]             [-]    ");
-        masNodoRango();
+        contarNodoRango();
     }
 
     public static void cloneRange() {
@@ -43,6 +43,19 @@ public class TestArbolBBExtra extends TestArbolBB {
             n = ord[j];
             System.out.println("frontera menor de: " + n);
             System.out.println("lista: " + a.fronteraMenor(n));
+            System.out.println();
+        }
+    }
+
+    public static void contarNodoRango() {
+        int minimo, maximo;
+        for (int i = 0; i < ord.length; i++) {
+            for (int j = i; j < ord.length; j++) {
+                minimo = ord[i];
+                maximo = ord[j];
+                System.out.println();
+                System.out.println("Contar nodos Rango [" + minimo + ", " + maximo + "]: " + a.contarNodoRango(minimo, maximo));
+            }
             System.out.println();
         }
     }
