@@ -20,6 +20,21 @@ public class ArbolBBE extends ArbolBB {
         return Math.max(cantidadNodoIzquierdo, cantidadNodoDerecho);
     }
 
+    public int contarNodoMayor(Comparable minimo) {
+        return contarNodoMayorAux(this.raiz, minimo);
+    }
+
+    public int contarNodoMayorAux(NodoABB nodo, Comparable minimo) {
+        int cantidad = 0;
+        if (nodo != null) {
+            cantidad = contarNodoMayorAux(nodo.getDerecho(), minimo);
+            if (nodo.getElemento().compareTo(minimo) >= 0) {
+                cantidad += 1 + contarNodoMayorAux(nodo.getIzquierdo(), minimo);
+            }
+        }
+        return cantidad;
+    }
+
     public int contarNodoRango(Comparable minimo, Comparable maximo) {
         return contarNodoRangoAux(this.raiz, minimo, maximo);
     }
