@@ -12,7 +12,7 @@ public class TestArbolBBExtra extends TestArbolBB {
         System.out.println("             |------------[2]------------|                     |------------[8]------------|             ");
         System.out.println("     |------[1]------|           |------[3]------|     |------[6]------|           |------[9]------|     ");
         System.out.println("    [-]             [-]         [-]             [-]   [5]             [7]         [-]             [-]    ");
-        contarNodoMayor();
+        contarNodoMenor();
     }
 
     public static void cloneRange() {
@@ -73,7 +73,6 @@ public class TestArbolBBExtra extends TestArbolBB {
             }
             System.out.println();
         }
-
     }
 
     public static void contarNodoMayor() {
@@ -82,6 +81,15 @@ public class TestArbolBBExtra extends TestArbolBB {
             minimo = ord[i];
             System.out.println();
             System.out.println("Cantidad de nodos mayores a " + minimo + ": " + a.contarNodoMayor(minimo));
+        }
+    }
+
+    public static void contarNodoMenor() {
+        int maximo;
+        for (int i = 0; i < ord.length; i++) {
+            maximo = ord[i];
+            System.out.println();
+            System.out.println("Cantidad de nodos menores a " + maximo + ": " + a.contarNodoMenor(maximo));
         }
     }
 
