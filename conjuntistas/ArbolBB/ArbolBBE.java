@@ -153,6 +153,27 @@ public class ArbolBBE extends ArbolBB {
         }
     }
 
+    public Lista fronteraRango(Comparable minimo, Comparable maximo) {
+        Lista lista = new Lista();
+        fronteraRangoAux(this.raiz, lista, minimo, maximo);
+        return lista;
+    }
+
+    private void fronteraRangoAux(NodoABB nodo, Lista lista, Comparable minimo, Comparable maximo) {
+        if (nodo != null) {
+            Comparable elemento = nodo.getElemento();
+            if (elemento.compareTo(maximo) < 0) {
+                fronteraRangoAux(nodo.getDerecho(), lista, minimo, maximo);
+            }
+            if (elemento.compareTo(minimo) > 0) {
+                fronteraRangoAux(nodo.getIzquierdo(), lista, minimo, maximo);
+            }
+            if (elemento.compareTo(minimo) >= 0 && elemento.compareTo(maximo) <= 0 && nodo.getIzquierdo() == null && nodo.getDerecho() == null) {
+                lista.insertar(elemento, 1);
+            }
+        }
+    }
+
     // eliminar
 
     public boolean eliminarMayores(Comparable x) {
