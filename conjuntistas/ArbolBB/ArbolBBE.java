@@ -1,5 +1,6 @@
 package conjuntistas.ArbolBB;
 import lineales.dinamicas.Lista;
+import java.lang.Math;
 
 public class ArbolBBE extends ArbolBB {
 
@@ -8,6 +9,33 @@ public class ArbolBBE extends ArbolBB {
     }
 
     // obtencion de datos
+
+    public int masNodosRango(Comparable minimo, Comparable maximo) {
+        int cantidadNodoIzquierdo = 0;
+        int cantidadNodoDerecho = 0;
+        if (this.raiz != null) {
+            cantidadNodoIzquierdo = contarNodoRangoAux(this.raiz.getIzquierdo(), minimo, maximo);
+            cantidadNodoDerecho = contarNodoRangoAux(this.raiz.getDerecho(), minimo, maximo);
+        }
+        return Math.max(cantidadNodoIzquierdo, cantidadNodoDerecho);
+    }
+
+    public int contarNodoRangoAux(NodoABB nodo, Comparable minimo, Comparable maximo) {
+        int cantidad = 0;
+        if (nodo != null) {
+            Comparable elemento = nodo.getElemento();
+            if (elemento.compareTo(minimo) > 0) {
+                cantidad += contarNodoRangoAux(nodo.getIzquierdo(), minimo, maximo);
+            }
+            if (elemento.compareTo(maximo) < 0) {
+                cantidad += contarNodoRangoAux(nodo.getDerecho(), minimo, maximo);
+            }
+            if (elemento.compareTo(minimo) >= 0 && elemento.compareTo(maximo) <= 0) {
+                cantidad++;
+            }
+        }
+        return cantidad;
+    }
 
     // listar
 
