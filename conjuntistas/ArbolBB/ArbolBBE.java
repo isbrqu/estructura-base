@@ -88,6 +88,26 @@ public class ArbolBBE extends ArbolBB {
         return cantidad;
     }
 
+    public int contarHojasMayor(Comparable minimo) {
+        return contarHojasMayorAux(this.raiz, minimo);
+    }
+
+    private int contarHojasMayorAux(NodoABB nodo, Comparable minimo) {
+        int cantidad = 0;
+        if (nodo != null) {
+            Comparable elemento = nodo.getElemento();
+            cantidad = contarHojasMayorAux(nodo.getDerecho(), minimo);
+            if (elemento.compareTo(minimo) >= 0) {
+                if (nodo.getIzquierdo() == null && nodo.getDerecho() == null) {
+                    cantidad++;
+                } else {
+                    cantidad += contarHojasMayorAux(nodo.getIzquierdo(), minimo);
+                }
+            }
+        }
+        return cantidad;
+    }
+
     // listar
 
     public Lista listarMayor(Comparable x) {

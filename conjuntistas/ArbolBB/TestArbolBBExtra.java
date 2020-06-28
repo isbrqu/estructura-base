@@ -12,7 +12,7 @@ public class TestArbolBBExtra extends TestArbolBB {
         System.out.println("             |------------[2]------------|                     |------------[8]------------|             ");
         System.out.println("     |------[1]------|           |------[3]------|     |------[6]------|           |------[9]------|     ");
         System.out.println("    [-]             [-]         [-]             [-]   [5]             [7]         [-]             [-]    ");
-        cloneMenor();
+        contarHojasMayor();
     }
 
     public static void cloneRange() {
@@ -185,6 +185,17 @@ public class TestArbolBBExtra extends TestArbolBB {
         System.out.println("Clon menor de -1");
         System.out.println(a.cloneMenor(-1));
         System.out.println();
+    }
+
+    public static void contarHojasMayor() {
+        int minimo;
+        for (int i = 0; i < ord.length; i++) {
+            minimo = ord[i];
+            System.out.println();
+            System.out.println("Cantidad de hojas mayor a " + minimo + ": " + a.contarHojasMayor(minimo));
+        }
+        System.out.println();
+        System.out.println("Cantidad de hojas mayor a 10: " + a.contarHojasMayor(10));
     }
 
 }
