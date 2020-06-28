@@ -200,7 +200,7 @@ public class ArbolBB {
     }
 
     // caso 1
-    private void eliminarHoja(NodoABB hijo, NodoABB padre) {
+    protected void eliminarHoja(NodoABB hijo, NodoABB padre) {
         if (padre == null) {
             // caso especial un unico elemento
             this.raiz = null;
