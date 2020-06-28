@@ -149,6 +149,32 @@ public class ArbolBBE extends ArbolBB {
         return cantidad;
     }
 
+    public boolean verificarRango(Comparable minimo, Comparable maximo) {
+        int max = (int) maximo;
+        int max2 = (verificarRangoAux(this.raiz, (int) minimo, minimo, maximo)) - 1;
+        return max == max2;
+    }
+
+    private int verificarRangoAux(NodoABB nodo, int indice, Comparable minimo, Comparable maximo) {
+        Comparable elemento = nodo.getElemento();
+        NodoABB izquierdo = nodo.getIzquierdo();
+        NodoABB derecho = nodo.getDerecho();
+        if (elemento.compareTo(minimo) > 0 && izquierdo != null) {
+            indice = verificarRangoAux(izquierdo, indice, minimo, maximo);
+        }
+        if (indice != -1 && elemento.compareTo(minimo) >= 0 && elemento.compareTo(maximo) <= 0) {
+            if (elemento.equals(indice)) {
+                indice++;
+            } else {
+                indice = -1;
+            }
+        }
+        if (indice != -1 && elemento.compareTo(maximo) < 0 && derecho != null) {
+            indice = verificarRangoAux(derecho, indice, minimo, maximo);
+        }
+        return indice;
+    }
+
     // listar
 
     public Lista listarMayor(Comparable x) {
