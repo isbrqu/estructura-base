@@ -360,6 +360,27 @@ public class ArbolBBE extends ArbolBB {
         return clon;
     }
 
+    public ArbolBB cloneMenor(Comparable maximo) {
+        ArbolBB arbol = new ArbolBB();
+        arbol.raiz = cloneMenorAux(this.raiz, maximo);
+        return arbol;
+    }
+
+    private NodoABB cloneMenorAux(NodoABB nodo, Comparable maximo) {
+        NodoABB clon = null;
+        if (nodo != null) {
+            Comparable elemento = nodo.getElemento();
+            if (elemento.compareTo(maximo) <= 0) {
+                NodoABB izquierdo = cloneMenorAux(nodo.getIzquierdo(), maximo);
+                NodoABB derecho = cloneMenorAux(nodo.getDerecho(), maximo);
+                clon = new NodoABB(elemento, izquierdo, derecho);
+            } else {
+                clon = cloneMenorAux(nodo.getIzquierdo(), maximo);
+            }
+        }
+        return clon;
+    }
+
     public ArbolBB cloneRange(Comparable minimo, Comparable maximo) {
         ArbolBB arbol = new ArbolBB();
         arbol.raiz = cloneRangeAux(this.raiz, minimo, maximo);
