@@ -12,7 +12,7 @@ public class TestArbolBBExtra extends TestArbolBB {
         System.out.println("             |------------[2]------------|                     |------------[8]------------|             ");
         System.out.println("     |------[1]------|           |------[3]------|     |------[6]------|           |------[9]------|     ");
         System.out.println("    [-]             [-]         [-]             [-]   [5]             [7]         [-]             [-]    ");
-        eliminarFronteraRango();
+        obtenerNodo();
     }
 
     public static void cloneRange() {
@@ -144,6 +144,17 @@ public class TestArbolBBExtra extends TestArbolBB {
             }
             System.out.println();
         }
+    }
+
+    public static void obtenerNodo() {
+        int valor;
+        for (int i = 0; i < ord.length; i++) {
+            valor = ord[i];
+            System.out.println();
+            System.out.println("Obtener Nodo " + valor + ": " + a.obtenerNodo(valor).getElemento());
+        }
+        System.out.println();
+        System.out.println("Obtener Nodo -1: " + a.obtenerNodo(-1));
     }
 
 }

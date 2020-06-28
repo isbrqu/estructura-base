@@ -10,6 +10,23 @@ public class ArbolBBE extends ArbolBB {
 
     // obtencion de datos
 
+    public NodoABB obtenerNodo(Comparable x) {
+        Comparable elemento;
+        NodoABB nodo = this.raiz;
+        NodoABB resultado = null;
+        while (resultado == null && nodo != null) {
+            elemento = nodo.getElemento();
+            if (elemento.equals(x)) {
+                resultado = nodo;
+            } else if (elemento.compareTo(x) < 0) {
+                nodo = nodo.getDerecho();
+            } else {
+                nodo = nodo.getIzquierdo();
+            }
+        }
+        return nodo;
+    }
+
     public int masNodosRango(Comparable minimo, Comparable maximo) {
         int cantidadNodoIzquierdo = 0;
         int cantidadNodoDerecho = 0;
