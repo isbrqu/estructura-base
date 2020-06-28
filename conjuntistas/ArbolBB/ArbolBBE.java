@@ -297,6 +297,29 @@ public class ArbolBBE extends ArbolBB {
         return exito;
     }
 
+    public boolean eliminarFronteraRango(Comparable minimo, Comparable maximo) {
+        return eliminarFronteraRangoAux(this.raiz, null, minimo, maximo);
+    }
+
+    private boolean eliminarFronteraRangoAux(NodoABB nodo, NodoABB padre, Comparable minimo, Comparable maximo) {
+        boolean exito = false;
+        if (nodo != null) {
+            Comparable elemento = nodo.getElemento();
+            if (elemento.compareTo(minimo) >= 0 && elemento.compareTo(maximo) <= 0 && nodo.getIzquierdo() == null && nodo.getDerecho() == null) {
+                eliminarHoja(nodo, padre);
+                exito = true;
+            } else {
+                if (elemento.compareTo(minimo) > 0) {
+                    exito = eliminarFronteraRangoAux(nodo.getIzquierdo(), nodo, minimo, maximo);
+                }
+                if (elemento.compareTo(maximo) < 0) {
+                    exito = eliminarFronteraRangoAux(nodo.getDerecho(), nodo, minimo, maximo) || exito;
+                }
+            }
+        }
+        return exito;
+    }
+
     // clonado
 
     public ArbolBB cloneRange(Comparable minimo, Comparable maximo) {
