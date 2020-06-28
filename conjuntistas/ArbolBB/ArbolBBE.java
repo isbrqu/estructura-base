@@ -276,6 +276,27 @@ public class ArbolBBE extends ArbolBB {
         return exito;
     }
 
+    public boolean eliminarFronteraMenor(Comparable maximo) {
+        return eliminarFronteraMenorAux(this.raiz, null, maximo);
+    }
+
+    private boolean eliminarFronteraMenorAux(NodoABB nodo, NodoABB padre, Comparable maximo) {
+        boolean exito = false;
+        if (nodo != null) {
+            Comparable elemento = nodo.getElemento();
+            exito = eliminarFronteraMenorAux(nodo.getIzquierdo(), nodo, maximo);
+            if (elemento.compareTo(maximo) <= 0) {
+                if (nodo.getIzquierdo() == null && nodo.getDerecho() == null) {
+                    eliminarHoja(nodo, padre);
+                    exito = true;
+                } else {
+                    exito = eliminarFronteraMenorAux(nodo.getDerecho(), nodo, maximo) || exito;
+                }
+            }
+        }
+        return exito;
+    }
+
     // clonado
 
     public ArbolBB cloneRange(Comparable minimo, Comparable maximo) {

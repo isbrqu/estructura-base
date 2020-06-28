@@ -12,7 +12,7 @@ public class TestArbolBBExtra extends TestArbolBB {
         System.out.println("             |------------[2]------------|                     |------------[8]------------|             ");
         System.out.println("     |------[1]------|           |------[3]------|     |------[6]------|           |------[9]------|     ");
         System.out.println("    [-]             [-]         [-]             [-]   [5]             [7]         [-]             [-]    ");
-        eliminarFronteraMayor();
+        eliminarFronteraMenor();
     }
 
     public static void cloneRange() {
@@ -112,6 +112,18 @@ public class TestArbolBBExtra extends TestArbolBB {
             minimo = ord[i];
             System.out.println();
             System.out.println("Eliminar frontera mayor a " + minimo + ": " + a.eliminarFronteraMayor(minimo));
+            System.out.println(a);
+            a = new ArbolBBE();
+            llenar(a, num);
+        }
+    }
+
+    public static void eliminarFronteraMenor() {
+        int maximo;
+        for (int i = 0; i < ord.length; i++) {
+            maximo = ord[i];
+            System.out.println();
+            System.out.println("Eliminar frontera menor a " + maximo + ": " + a.eliminarFronteraMenor(maximo));
             System.out.println(a);
             a = new ArbolBBE();
             llenar(a, num);
