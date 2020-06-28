@@ -339,6 +339,27 @@ public class ArbolBBE extends ArbolBB {
 
     // clonado
 
+    public ArbolBB cloneMayor(Comparable minimo) {
+        ArbolBB arbol = new ArbolBB();
+        arbol.raiz = cloneMayorAux(this.raiz, minimo);
+        return arbol;
+    }
+
+    private NodoABB cloneMayorAux(NodoABB nodo, Comparable minimo) {
+        NodoABB clon = null;
+        if (nodo != null) {
+            Comparable elemento = nodo.getElemento();
+            if (elemento.compareTo(minimo) >= 0) {
+                NodoABB izquierdo = cloneMayorAux(nodo.getIzquierdo(), minimo);
+                NodoABB derecho = cloneMayorAux(nodo.getDerecho(), minimo);
+                clon = new NodoABB(elemento, izquierdo, derecho);
+            } else {
+                clon = cloneMayorAux(nodo.getDerecho(), minimo);
+            }
+        }
+        return clon;
+    }
+
     public ArbolBB cloneRange(Comparable minimo, Comparable maximo) {
         ArbolBB arbol = new ArbolBB();
         arbol.raiz = cloneRangeAux(this.raiz, minimo, maximo);
