@@ -41,7 +41,7 @@ public class ArbolBBE extends ArbolBB {
         return contarNodoMayorAux(this.raiz, minimo);
     }
 
-    public int contarNodoMayorAux(NodoABB nodo, Comparable minimo) {
+    private int contarNodoMayorAux(NodoABB nodo, Comparable minimo) {
         int cantidad = 0;
         if (nodo != null) {
             cantidad = contarNodoMayorAux(nodo.getDerecho(), minimo);
@@ -56,7 +56,7 @@ public class ArbolBBE extends ArbolBB {
         return contarNodoMenorAux(this.raiz, maximo);
     }
 
-    public int contarNodoMenorAux(NodoABB nodo, Comparable maximo) {
+    private int contarNodoMenorAux(NodoABB nodo, Comparable maximo) {
         int cantidad = 0;
         if (nodo != null) {
             cantidad = contarNodoMenorAux(nodo.getIzquierdo(), maximo);
@@ -71,7 +71,7 @@ public class ArbolBBE extends ArbolBB {
         return contarNodoRangoAux(this.raiz, minimo, maximo);
     }
 
-    public int contarNodoRangoAux(NodoABB nodo, Comparable minimo, Comparable maximo) {
+    private int contarNodoRangoAux(NodoABB nodo, Comparable minimo, Comparable maximo) {
         int cantidad = 0;
         if (nodo != null) {
             Comparable elemento = nodo.getElemento();
