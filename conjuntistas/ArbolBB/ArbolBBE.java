@@ -59,6 +59,47 @@ public class ArbolBBE extends ArbolBB {
         return candidato;
     }
 
+    public int diferenciaCandidatos(Comparable elemento) {
+        int valor = -1;
+        NodoABB nodo = obtenerNodo(elemento);
+        if (nodo != null) {
+            Comparable minimo = minimo(nodo);
+            if (minimo != null) {
+                Comparable maximo = maximo(nodo);
+                if (maximo != null) {
+                    valor = ((int) maximo) - ((int) minimo);
+                } else {
+                    valor = -2;
+                }
+            } else {
+                valor = -2;
+            }
+        }
+        return valor;
+    }
+
+    private Comparable minimo(NodoABB nodo) {
+        Comparable elemento = null;
+        nodo = nodo.getIzquierdo();
+        // bajada por la izquierda
+        while (nodo != null) {
+            elemento = nodo.getElemento();
+            nodo = nodo.getIzquierdo();
+        }
+        return elemento;
+    }
+
+    private Comparable maximo(NodoABB nodo) {
+        Comparable elemento = null;
+        nodo = nodo.getDerecho();
+        // bajada por la derecha
+        while (nodo != null) {
+            elemento = nodo.getElemento();
+            nodo = nodo.getDerecho();
+        }
+        return elemento;
+    }
+
     // obtencion de datos
 
     public NodoABB obtenerNodo(Comparable x) {

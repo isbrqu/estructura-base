@@ -12,7 +12,7 @@ public class TestArbolBBExtra extends TestArbolBB {
         System.out.println("             |------------[2]------------|                     |------------[8]------------|             ");
         System.out.println("     |------[1]------|           |------[3]------|     |------[6]------|           |------[9]------|     ");
         System.out.println("    [-]             [-]         [-]             [-]   [5]             [7]         [-]             [-]    ");
-        verificarRango();
+        diferenciaCandidatos();
     }
 
     public static void cloneRange() {
@@ -233,6 +233,17 @@ public class TestArbolBBExtra extends TestArbolBB {
             }
             System.out.println();
         }
+    }
+
+    public static void diferenciaCandidatos() {
+        int valor;
+        for (int i = 0; i < ord.length; i++) {
+            valor = ord[i];
+            System.out.println();
+            System.out.println("Diferencia de cantidatos " + valor + ": " + a.diferenciaCandidatos(valor));
+        }
+        System.out.println();
+        System.out.println("Cantidad de hojas menor a -1: " + a.diferenciaCandidatos(-1));
     }
 
 }
