@@ -8,56 +8,56 @@ public class ArbolBBE extends ArbolBB {
         super();
     }
 
-    public Comparable mejorCandidato(Comparable elem) {
-        Comparable candidato = 0;
-        NodoABB nodo = obtenerNodo(elem);
-        if (nodo != null) {
-            if (nodo.getIzquierdo() != null || nodo.getDerecho() != null) {
-                Comparable izquierdo = mejorCandidatoAux(nodo.getIzquierdo(), elem);
-                Comparable derecho = mejorCandidato(nodo.getDerecho(), elem);
-                if (!izquierdo.equals(valor) && !derecho.equals(valor)) {
-                    if (-1 * izquierdo.compareTo(valor) < derecho.compareTo(valor))  {
-                        candidato = izquierdo;
-                    } else {
-                        candidato = derecho;
-                    }
-                } else if (izquierdo.equals(valor)) {
-                    candidato = derecho;
-                } else {
-                    candidato = izquierdo;
-                }
-            } else {
-                candidato = -1;
-            }
-        }
-        return candidato;
-    }
+    // public Comparable mejorCandidato(Comparable elem) {
+    //     Comparable candidato = 0;
+    //     NodoABB nodo = obtenerNodo(elem);
+    //     if (nodo != null) {
+    //         if (nodo.getIzquierdo() != null || nodo.getDerecho() != null) {
+    //             Comparable izquierdo = mejorCandidatoAux(nodo.getIzquierdo(), elem);
+    //             Comparable derecho = mejorCandidato(nodo.getDerecho(), elem);
+    //             if (!izquierdo.equals(valor) && !derecho.equals(valor)) {
+    //                 if (-1 * izquierdo.compareTo(valor) < derecho.compareTo(valor))  {
+    //                     candidato = izquierdo;
+    //                 } else {
+    //                     candidato = derecho;
+    //                 }
+    //             } else if (izquierdo.equals(valor)) {
+    //                 candidato = derecho;
+    //             } else {
+    //                 candidato = izquierdo;
+    //             }
+    //         } else {
+    //             candidato = -1;
+    //         }
+    //     }
+    //     return candidato;
+    // }
 
-    public Comparable mejorCandidatoAux(NodoABB nodo, Comparable valor) {
-        Comparable candidato = valor;
-        if (nodo != null) {
-            Comparable elemento = nodo.getElemento();
-            // negativo
-            Comparable izquierdo = mejorCandidatoAux(nodo.getIzquierdo(), valor);
-            // positivo
-            Comparable derecho = mejorCandidatoAux(nodo.getDerecho(), valor);
-            if (!izquierdo.equals(valor) && !derecho.equals(valor)) {
-                if (-1 * izquierdo.compareTo(valor) < derecho.compareTo(valor))  {
-                    candidato = izquierdo;
-                } else {
-                    candidato = derecho;
-                }
-            } else if (izquierdo.equals(valor)) {
-                candidato = derecho;
-            } else {
-                candidato = izquierdo;
-            }
-            if (candidato.equals(valor) || elemento.compareTo(valor) < Math.abs(candidato.compareTo(valor))) {
-                candidato = elemento;
-            }
-        }
-        return candidato;
-    }
+    // public Comparable mejorCandidatoAux(NodoABB nodo, Comparable valor) {
+    //     Comparable candidato = valor;
+    //     if (nodo != null) {
+    //         Comparable elemento = nodo.getElemento();
+    //         // negativo
+    //         Comparable izquierdo = mejorCandidatoAux(nodo.getIzquierdo(), valor);
+    //         // positivo
+    //         Comparable derecho = mejorCandidatoAux(nodo.getDerecho(), valor);
+    //         if (!izquierdo.equals(valor) && !derecho.equals(valor)) {
+    //             if (-1 * izquierdo.compareTo(valor) < derecho.compareTo(valor))  {
+    //                 candidato = izquierdo;
+    //             } else {
+    //                 candidato = derecho;
+    //             }
+    //         } else if (izquierdo.equals(valor)) {
+    //             candidato = derecho;
+    //         } else {
+    //             candidato = izquierdo;
+    //         }
+    //         if (candidato.equals(valor) || elemento.compareTo(valor) < Math.abs(candidato.compareTo(valor))) {
+    //             candidato = elemento;
+    //         }
+    //     }
+    //     return candidato;
+    // }
 
     public int diferenciaCandidatos(Comparable elemento) {
         int valor = -1;
@@ -73,6 +73,24 @@ public class ArbolBBE extends ArbolBB {
                 }
             } else {
                 valor = -2;
+            }
+        }
+        return valor;
+    }
+
+    public int amplitudSubArbol(Comparable elemento) {
+        int valor = -1;
+        NodoABB nodo = obtenerNodo(elemento);
+        if (nodo != null) {
+            valor = 0;
+            Comparable minimo = minimo(nodo);
+            Comparable maximo = maximo(nodo);
+            if (minimo != null && minimo != null) {
+                valor = (int) maximo - (int) minimo;
+            } else if (minimo != null) {
+                valor = (int) elemento - (int) minimo;
+            } else if (maximo != null) {
+                valor = (int) maximo - (int) elemento;
             }
         }
         return valor;

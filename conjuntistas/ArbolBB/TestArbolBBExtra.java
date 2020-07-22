@@ -12,7 +12,7 @@ public class TestArbolBBExtra extends TestArbolBB {
         System.out.println("             |------------[2]------------|                     |------------[8]------------|             ");
         System.out.println("     |------[1]------|           |------[3]------|     |------[6]------|           |------[9]------|     ");
         System.out.println("    [-]             [-]         [-]             [-]   [5]             [7]         [-]             [-]    ");
-        diferenciaCandidatos();
+        amplitudSubArbol();
     }
 
     public static void cloneRange() {
@@ -244,6 +244,17 @@ public class TestArbolBBExtra extends TestArbolBB {
         }
         System.out.println();
         System.out.println("Cantidad de hojas menor a -1: " + a.diferenciaCandidatos(-1));
+    }
+
+    public static void amplitudSubArbol() {
+        int valor;
+        for (int i = 0; i < ord.length; i++) {
+            valor = ord[i];
+            System.out.println();
+            System.out.println("Amplitud de subárbol " + valor + ": " + a.amplitudSubArbol(valor));
+        }
+        System.out.println();
+        System.out.println("Amplitud de subárbol -1: " + a.amplitudSubArbol(-1));
     }
 
 }
