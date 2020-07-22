@@ -12,7 +12,7 @@ public class TestArbolBBExtra extends TestArbolBB {
         System.out.println("             |------------[2]------------|                     |------------[8]------------|             ");
         System.out.println("     |------[1]------|           |------[3]------|     |------[6]------|           |------[9]------|     ");
         System.out.println("    [-]             [-]         [-]             [-]   [5]             [7]         [-]             [-]    ");
-        amplitudSubArbol();
+        mejorCandidato();
     }
 
     public static void cloneRange() {
@@ -255,6 +255,17 @@ public class TestArbolBBExtra extends TestArbolBB {
         }
         System.out.println();
         System.out.println("Amplitud de subárbol -1: " + a.amplitudSubArbol(-1));
+    }
+
+    public static void mejorCandidato() {
+        int valor;
+        for (int i = 0; i < ord.length; i++) {
+            valor = ord[i];
+            System.out.println();
+            System.out.println("Mejor candidato de " + valor + ": " + a.mejorCandidato(valor));
+        }
+        System.out.println();
+        System.out.println("Mejor candidato de -1: " + a.mejorCandidato(-1));
     }
 
 }
