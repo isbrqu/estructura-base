@@ -83,7 +83,7 @@ public class ArbolBBE extends ArbolBB {
             valor = 0;
             Comparable minimo = minimo(nodo);
             Comparable maximo = maximo(nodo);
-            if (minimo != null && minimo != null) {
+            if (minimo != null && maximo != null) {
                 valor = (int) maximo - (int) minimo;
             } else if (minimo != null) {
                 valor = (int) elemento - (int) minimo;
