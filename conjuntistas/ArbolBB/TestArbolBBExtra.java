@@ -8,11 +8,7 @@ public class TestArbolBBExtra extends TestArbolBB {
 
     public static void main(String[] args) {
         llenar(a, num);
-        System.out.println("                           |-----------------------[4]-----------------------|                           ");
-        System.out.println("             |------------[2]------------|                     |------------[8]------------|             ");
-        System.out.println("     |------[1]------|           |------[3]------|     |------[6]------|           |------[9]------|     ");
-        System.out.println("    [-]             [-]         [-]             [-]   [5]             [7]         [-]             [-]    ");
-        mejorCandidato();
+        a.imprimir();
     }
 
     public static void cloneRange() {

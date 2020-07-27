@@ -1,5 +1,7 @@
 package conjuntistas.ArbolBB;
+
 import lineales.dinamicas.Lista;
+import lineales.dinamicas.Cola;
 
 public class ArbolBB {
 
@@ -276,6 +278,109 @@ public class ArbolBB {
             s = toStringAux(derecho, s);
         }
         return s;
+    }
+
+    public int altura() {
+        return alturaAux(this.raiz,  -1);
+    }
+
+    private int alturaAux(NodoABB nodo, int altura) {
+        if (nodo != null) {
+            int n1 = alturaAux(nodo.getIzquierdo(), altura + 1);
+            int n2 = alturaAux(nodo.getDerecho(), altura + 1);
+            altura = (n1 > n2) ? n1 : n2;
+        }
+        return altura;
+    }
+
+    public void imprimir() {
+        int altura = altura();
+        Cola cola = new Cola();
+        cola.poner(this.raiz);
+        int i = 1, j = 1;
+        String texto = "";
+        int longitud = xcalc(altura);
+        String brazoIzq = repetir(longitud-1, "-");
+        String brazoDer = brazoIzq + "-";
+        if (altura == 1)
+            longitud = 2;
+        String espacioIzq = repetir(longitud, " ");
+        String espacioDer = espacioIzq + "   ";
+        NodoABB nodo;
+        // Comparable elemento;
+        while (altura > 0) {
+            nodo = (NodoABB) cola.obtenerFrente();
+            cola.sacar();
+            if (nodo == null) {
+                cola.poner(null);
+                cola.poner(null);
+            } else {
+                cola.poner(nodo.getIzquierdo());
+                cola.poner(nodo.getDerecho());
+            }
+            texto += espacioIzq + "|" + brazoIzq + nodificar(nodo) + brazoDer + "|" + espacioDer;
+            if (i == j) {
+                texto += "\n";
+                altura--;
+                longitud = xcalc(altura);
+                brazoIzq = repetir(longitud-1, "-");
+                brazoDer = brazoIzq + "-";
+                if (altura == 1)
+                    longitud = 2;
+                espacioIzq = repetir(longitud, " ");
+                espacioDer = espacioIzq + "   ";
+                i *= 2;
+                j = 1;
+            } else {
+                j++;
+            }
+        }
+        boolean bandera = true;
+        while (!cola.esVacia()) {
+            nodo = (NodoABB) cola.obtenerFrente();
+            cola.sacar();
+            texto += nodificarFinal(nodo) + ((bandera) ? "        " : "    ");
+            bandera = !bandera;
+        }
+        System.out.println(texto);
+    }
+
+    private String nodificar(NodoABB nodo) {
+        String resultado = "-[-]";
+        if (nodo != null) {
+            int n = (int) nodo.getElemento();
+            resultado = ((n < 10) ? "-" : "") + "[" + n + "]";
+        }
+        return resultado;
+    }
+
+    private String nodificarFinal(NodoABB nodo) {
+        String resultado = " [-]";
+        if (nodo != null) {
+            int n = (int) nodo.getElemento();
+            resultado = ((n < 10) ? " " : "") + "[" + n + "]";
+        }
+        return resultado;
+    }
+
+    private String repetir(int n, String s) {
+        String c = "";
+        for (int i = 0; i < n; i++)
+            c += s;
+        return c;
+    }
+
+    private int xcalc(int n) {
+        int resultado = 4;
+        if (n > 1) {
+            resultado = 8;
+            int j = 1;
+            for (int i = 2; i < n; i++) {
+                resultado += 10 * j;
+                j *= 2;
+            }
+        }
+        return resultado;
     }
 
 }
