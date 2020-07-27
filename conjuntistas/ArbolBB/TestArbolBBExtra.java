@@ -2,13 +2,14 @@ package conjuntistas.ArbolBB;
 
 public class TestArbolBBExtra extends TestArbolBB {
 
-    public static int[] num = {4, 2, 1, 3, 8, 6, 5, 7, 9};
-    public static int[] ord = {1, 2, 3, 4, 5, 6, 7, 8, 9};
+    public static int[] num = {4, 2, 1, 3, 8, 6, 5, 7, 11, 10, 9, 12, 13};
+    public static int[] ord = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13};
     public static ArbolBBE a = new ArbolBBE();
 
     public static void main(String[] args) {
         llenar(a, num);
         a.imprimir();
+        diferenciaCandidatos();
     }
 
     public static void cloneRange() {
@@ -239,7 +240,7 @@ public class TestArbolBBExtra extends TestArbolBB {
             System.out.println("Diferencia de cantidatos " + valor + ": " + a.diferenciaCandidatos(valor));
         }
         System.out.println();
-        System.out.println("Cantidad de hojas menor a -1: " + a.diferenciaCandidatos(-1));
+        System.out.println("Diferencia de cantidatos -1: " + a.diferenciaCandidatos(-1));
     }
 
     public static void amplitudSubArbol() {

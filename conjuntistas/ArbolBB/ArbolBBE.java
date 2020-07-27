@@ -61,16 +61,12 @@ public class ArbolBBE extends ArbolBB {
         int valor = -1;
         NodoABB nodo = obtenerNodo(elemento);
         if (nodo != null) {
-            Comparable minimo = minimo(nodo);
-            if (minimo != null) {
-                Comparable maximo = maximo(nodo);
-                if (maximo != null) {
-                    valor = ((int) maximo) - ((int) minimo);
-                } else {
-                    valor = -2;
-                }
-            } else {
+            NodoABB izquierdo = nodo.getIzquierdo();
+            NodoABB derecho = nodo.getDerecho();
+            if (izquierdo == null || derecho == null) {
                 valor = -2;
+            } else {
+                valor = (int) valorMinimo(derecho) - (int) valorMaximo(izquierdo);
             }
         }
         return valor;
@@ -92,6 +88,24 @@ public class ArbolBBE extends ArbolBB {
             }
         }
         return valor;
+    }
+
+    private Comparable valorMinimo(NodoABB nodo) {
+        Comparable elemento = null;
+        while (nodo != null) {
+            elemento = nodo.getElemento();
+            nodo = nodo.getIzquierdo();
+        }
+        return elemento;
+    }
+
+    private Comparable valorMaximo(NodoABB nodo) {
+        Comparable elemento = null;
+        while (nodo != null) {
+            elemento = nodo.getElemento();
+            nodo = nodo.getDerecho();
+        }
+        return elemento;
     }
 
     private Comparable minimo(NodoABB nodo) {
