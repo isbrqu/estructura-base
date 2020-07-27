@@ -1,12 +1,14 @@
 package conjuntistas.ArbolBB;
+import java.util.Arrays;
 
 public class TestArbolBBExtra extends TestArbolBB {
 
-    public static int[] num = {4, 2, 1, 3, 8, 6, 5, 7, 11, 10, 9, 12, 13};
-    public static int[] ord = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13};
+    public static int[] num = {8, 3, 6, 1, 4, 7, 10, 14, 13};
+    public static int[] ord = Arrays.copyOf(num, num.length);
     public static ArbolBBE a = new ArbolBBE();
 
     public static void main(String[] args) {
+        Arrays.sort(ord);
         llenar(a, num);
         a.imprimir();
         diferenciaCandidatos();
