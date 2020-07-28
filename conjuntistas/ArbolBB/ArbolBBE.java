@@ -12,8 +12,8 @@ public class ArbolBBE extends ArbolBB {
         int valor = 0;
         NodoABB nodo = obtenerNodo(elemento);
         if (nodo != null) {
-            Comparable candidato1 = mayorDeMenores(nodo);
-            Comparable candidato2 = menorDeMayores(nodo);
+            Comparable candidato1 = valorMaximo(nodo.getIzquierdo());
+            Comparable candidato2 = valorMinimo(nodo.getDerecho());
             valor = -1;
             if (candidato1 != null && candidato2 != null) {
                 int n = (int) elemento;
@@ -27,34 +27,6 @@ public class ArbolBBE extends ArbolBB {
             }
         }
         return valor;
-    }
-
-    private Comparable menorDeMayores(NodoABB nodo) {
-        Comparable elemento = null;
-        nodo = nodo.getDerecho();
-        if (nodo != null) {
-            elemento = nodo.getElemento();
-            nodo = nodo.getIzquierdo();
-            while (nodo != null) {
-                elemento = nodo.getElemento();
-                nodo = nodo.getIzquierdo();
-            }
-        }
-        return elemento;
-    }
-
-    private Comparable mayorDeMenores(NodoABB nodo) {
-        Comparable elemento = null;
-        nodo = nodo.getIzquierdo();
-        if (nodo != null) {
-            elemento = nodo.getElemento();
-            nodo = nodo.getDerecho();
-            while (nodo != null) {
-                elemento = nodo.getElemento();
-                nodo = nodo.getDerecho();
-            }
-        }
-        return elemento;
     }
 
     public int diferenciaCandidatos(Comparable elemento) {
