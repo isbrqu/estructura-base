@@ -8,6 +8,31 @@ public class ArbolBBE extends ArbolBB {
         super();
     }
 
+    public boolean eliminarElemSiguiente(Comparable elemento) {
+        boolean exito = false;
+        NodoABB nodo = obtenerNodo(elemento);
+        if (nodo != null && nodo.getDerecho() != null) {
+            exito = true;
+            NodoABB padre = padreDeSiguiente(nodo);
+            if (nodo == padre) {
+                padre.setDerecho(nodo.getDerecho().getDerecho());
+            } else {
+                padre.setIzquierdo(padre.getIzquierdo().getDerecho());
+            }
+        }
+        return exito;
+    }
+
+    public NodoABB padreDeSiguiente(NodoABB nodo) {
+        NodoABB padre = nodo;
+        NodoABB sig = nodo.getDerecho();
+        while (sig.getIzquierdo() != null) {
+            padre = sig;
+            sig = sig.getIzquierdo();
+        }
+        return padre;
+    }
+
     public Comparable mejorCandidato(Comparable elemento) {
         int valor = 0;
         NodoABB nodo = obtenerNodo(elemento);

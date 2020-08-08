@@ -4,6 +4,7 @@ import java.util.Arrays;
 public class TestArbolBBExtra extends TestArbolBB {
 
     public static int[] num = {8, 3, 6, 4, 1, 7, 10, 14, 13};
+    // public static int[] num = {};
     public static int[] ord = Arrays.copyOf(num, num.length);
     public static ArbolBBE a = new ArbolBBE();
 
@@ -11,7 +12,13 @@ public class TestArbolBBExtra extends TestArbolBB {
         Arrays.sort(ord);
         llenar(a, num);
         a.imprimir();
-        mejorCandidato();
+        // mejorCandidato();
+        // System.out.println(a.eliminarElemSiguiente(8));
+        System.out.println(a.eliminarElemSiguiente(3));
+        // System.out.println(a.eliminarElemSiguiente(14));
+        // System.out.println(a.eliminarElemSiguiente(17));
+        // System.out.println();
+        a.imprimir();
     }
 
     public static void cloneRange() {
