@@ -2,6 +2,7 @@ package conjuntistas.ArbolAVL;
 
 import lineales.dinamicas.Lista;
 import lineales.dinamicas.Cola;
+import lineales.dinamicas.Pila;
 
 public class ArbolAVL {
 
@@ -132,10 +133,11 @@ public class ArbolAVL {
     private void eliminarConDosHijos(NodoAVL nodo) {
         NodoAVL candidato = nodo.getDerecho();
         NodoAVL padreCandidato = nodo;
-        NodoAVL padreDePadreCandidato = null;
+        Pila ancestros = new Pila();
+        ancestros.apilar(nodo);
         // obtengo el menor de los mayores (candidato)
         while (candidato.getIzquierdo() != null) {
-            padreDePadreCandidato = padreCandidato;
+            ancestros.apilar(candidato);
             padreCandidato = candidato;
             candidato = candidato.getIzquierdo();
         }
@@ -153,6 +155,16 @@ public class ArbolAVL {
         } else {
             // caso comun, el candidato no es hijo del nodo
             padreCandidato.setIzquierdo(hijoCandidato);
+            // se balancean todos los nodos por los que se bajo para buscar al candidato
+            NodoAVL hijo, padre;
+            while (!ancestros.esVacia()) {
+                hijo = (NodoAVL) ancestros.obtenerTope();
+                ancestros.desapilar();
+                if (ancestros.obtenerTope() != null) {
+                    padre = (NodoAVL) ancestros.obtenerTope();
+                    balancear(hijo, padre);
+                }
+            }
             // padreCandidato.recalcularAltura();
             // balancear(padreCandidato, padreDePadreCandidato);
         }
@@ -299,8 +311,7 @@ public class ArbolAVL {
     public void llenar(int[] num) {
         for (int i = 0; i < num.length; i++) {
             insertar(num[i]);
-            this.imprimir();
-            System.out.println();
+            // this.imprimir();
         }
     }
 
