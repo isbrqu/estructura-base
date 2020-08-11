@@ -8,6 +8,7 @@ public class TestGrafo {
     public static void main(String[] args) {
         g.llenar(num);
         System.out.println(g);
+
     }
 
 }

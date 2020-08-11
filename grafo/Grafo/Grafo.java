@@ -19,11 +19,11 @@ public class Grafo {
         return exito;
     }
 
-    public NodoVert ubicarVertice(Object elemento) {
-        NodoVert aux = this.inicio;
-        while (aux != null && !aux.getElemento().equals(elemento))
-            aux = aux.getSigVertice();
-        return aux;
+    private NodoVert ubicarVertice(Object elemento) {
+        NodoVert vertice = this.inicio;
+        while (vertice != null && !vertice.getElemento().equals(elemento))
+            vertice = vertice.getSigVertice();
+        return vertice;
     }
 
     public boolean eliminarVertice(Object elemento) {
@@ -54,42 +54,42 @@ public class Grafo {
     public boolean existeCamino(Object origen, Object destino) {
         boolean exito = false;
         // verifica si ambos vertices existen
-        NodoVert auxOrigen = null;
-        NodoVert auxDestino = null;
-        NodoVert aux = this.inicio;
+        NodoVert vertice = this.inicio;
+        NodoVert verticeOrigen = null;
+        NodoVert verticeDestino = null;
         Object elemento;
-        while ((auxOrigen == null || auxDestino == null) && aux != null) {
-            elemento = aux.getElemento();
-            auxOrigen = (elemento.equals(origen)) ? aux : null;
-            auxDestino = (elemento.equals(destino)) ? aux : null;
-            aux = aux.getSigVertice();
+        while ((verticeOrigen == null || verticeDestino == null) && vertice != null) {
+            elemento = vertice.getElemento();
+            verticeOrigen = (elemento.equals(origen)) ? vertice : null;
+            verticeDestino = (elemento.equals(destino)) ? vertice : null;
+            vertice = vertice.getSigVertice();
         }
-        if (auxOrigen != null && auxDestino != null) {
+        if (verticeOrigen != null && verticeDestino != null) {
             // si ambos vertices existen busca si existe camino entre ambos
             Lista visitados = new Lista();
-            exito = existeCaminoAux(auxOrigen, destino, visitados);
+            exito = existeCaminoAux(verticeOrigen, destino, visitados);
         }
         return exito;
     }
 
-    public boolean existeCaminoAux(NodoVert nodo, Object destino, Lista visitados) {
+    public boolean existeCaminoAux(NodoVert origen, Object destino, Lista visitados) {
         boolean exito = false;
-        if (nodo != null) {
-            // si vertice nodo es el destino: HAY CAMINO!
-            Object elemento = nodo.getElemento();
+        if (origen != null) {
+            // si vertice origen es el destino: HAY CAMINO!
+            Object elemento = origen.getElemento();
             if (elemento.equals(destino)) {
                 exito = true;
             } else {
-                // si no es el destino verifica si hay camino entre nodo y destino
+                // si no es el destino verifica si hay camino entre origen y destino
                 visitados.insertar(elemento, 1);
-                NodoAdy ady = nodo.getPrimerAdy();
-                NodoVert vert;
-                while (!exito && ady != null) {
-                    vert = ady.getVertice();
-                    if (visitados.localizar(vert.getElemento()) < 0) {
-                        exito = existeCaminoAux(vert, destino, visitados);
+                NodoAdy adyacente = origen.getPrimerAdy();
+                NodoVert vertice;
+                while (!exito && adyacente != null) {
+                    vertice = adyacente.getVertice();
+                    if (visitados.localizar(vertice.getElemento()) < 0) {
+                        exito = existeCaminoAux(vertice, destino, visitados);
                     }
-                    ady = ady.getSigAdyacente();
+                    adyacente = adyacente.getSigAdyacente();
                 }
             }
         }
@@ -109,30 +109,29 @@ public class Grafo {
     public Lista lisarEnProfundidad() {
         Lista visitados = new Lista();
         // define un vertice donde comenzar a recorrer
-        NodoVert aux = this.inicio;
-        while (aux != null) {
+        NodoVert vertice = this.inicio;
+        while (vertice != null) {
             // si el vertice no fue visitado aun, avanza en profundidad
-            if (visitados.localizar(aux.getElemento()) < 0) {
-                listarEnProfundidadAux(aux, visitados);
-            }
-            aux = aux.getSigVertice();
+            if (visitados.localizar(vertice.getElemento()) < 0)
+                listarEnProfundidadAux(vertice, visitados);
+            vertice = vertice.getSigVertice();
         }
         return visitados;
     }
 
-    public void listarEnProfundidadAux(NodoVert nodo, Lista visitados) {
-        if (nodo != null) {
-            // marca el vertice nodo como visitado
-            visitados.insertar(nodo.getElemento(), visitados.longitud() + 1);
-            NodoAdy ady = nodo.getPrimerAdy();
-            NodoVert vert;
-            // visita en profundidad los adyacentes de nodo aun no visitados
-            while (ady != null) {
-                vert = ady.getVertice();
-                if (visitados.localizar(vert.getElemento()) < 0) {
-                    listarEnProfundidadAux(vert, visitados);
+    public void listarEnProfundidadAux(NodoVert origen, Lista visitados) {
+        if (origen != null) {
+            // marca el vertice origen como visitado
+            visitados.insertar(origen.getElemento(), visitados.longitud() + 1);
+            NodoAdy adyacente = origen.getPrimerAdy();
+            NodoVert vertice;
+            // visita en profundidad los adyacentes de origen aun no visitados
+            while (adyacente != null) {
+                vertice = adyacente.getVertice();
+                if (visitados.localizar(vertice.getElemento()) < 0) {
+                    listarEnProfundidadAux(vertice, visitados);
                 }
-                ady = ady.getSigAdyacente();
+                adyacente = adyacente.getSigAdyacente();
             }
         }
     }
