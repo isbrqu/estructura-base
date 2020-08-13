@@ -50,9 +50,22 @@ public class Grafo {
         return exito;
     }
 
-    public boolean eliminarArco(Object origen, Object destino) {
-        //
-        return false;
+    public boolean eliminarArco(Object origen, Object destino, int etiqueta) {
+        boolean exito = false;
+        // verifica si ambos vertices existen
+        NodoVert vertice = this.inicio;
+        NodoVert verticeOrigen = null;
+        NodoVert verticeDestino = null;
+        Object elemento;
+        while ((verticeOrigen == null || verticeDestino == null) && vertice != null) {
+            elemento = vertice.getElemento();
+            if (elemento.equals(origen)) verticeOrigen = vertice;
+            if (elemento.equals(destino)) verticeDestino = vertice;
+            vertice = vertice.getSigVertice();
+        }
+        if (verticeOrigen != null && verticeDestino != null)
+            exito = verticeOrigen.desconectar(verticeDestino, etiqueta);
+        return exito;
     }
 
     public boolean existeVertice(Object elemento) {
