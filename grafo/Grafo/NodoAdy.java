@@ -40,8 +40,4 @@ public class NodoAdy {
         return (this.vertice == vertice && this.etiqueta.equals(etiqueta));
     }
 
-    public boolean conectado(NodoVert vertice, int etiqueta) {
-        return (this.vertice == vertice && this.etiqueta.equals(etiqueta));
-    }
-
 }
