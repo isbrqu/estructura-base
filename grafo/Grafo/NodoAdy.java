@@ -6,8 +6,9 @@ public class NodoAdy {
     private NodoAdy sigAdyacente;
     private int etiqueta;
 
-    public NodoAdy(NodoVert vertice, int etiqueta) {
+    public NodoAdy(NodoVert vertice, NodoAdy sigAdyacente, int etiqueta) {
         this.vertice = vertice;
+        this.sigAdyacente = sigAdyacente;
         this.etiqueta = etiqueta;
     }
 
@@ -33,6 +34,14 @@ public class NodoAdy {
 
     public void setEtiqueta(int etiqueta) {
         this.etiqueta = etiqueta;
+    }
+
+    public boolean equals(NodoVert vertice, int etiqueta) {
+        return (this.vertice == vertice && this.etiqueta.equals(etiqueta));
+    }
+
+    public boolean conectado(NodoVert vertice, int etiqueta) {
+        return (this.vertice == vertice && this.etiqueta.equals(etiqueta));
     }
 
 }
