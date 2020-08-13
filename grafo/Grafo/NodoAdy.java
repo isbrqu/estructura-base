@@ -37,7 +37,7 @@ public class NodoAdy {
     }
 
     public boolean equals(NodoVert vertice, int etiqueta) {
-        return (this.vertice == vertice && this.etiqueta.equals(etiqueta));
+        return (this.vertice == vertice && this.etiqueta == etiqueta);
     }
 
 }
