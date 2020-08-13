@@ -86,8 +86,8 @@ public class NodoVert {
                 }
             }
             if (exito) {
-                anterior1.setSigVertice(anterior1.sigVertice().sigVertice());
-                anterior2.setSigVertice(anterior2.sigVertice().sigVertice());
+                anterior1.setSigAdyacente(anterior1.getSigAdyacente().getSigAdyacente());
+                anterior2.setSigAdyacente(anterior2.getSigAdyacente().getSigAdyacente());
             }
         }
         return exito;
