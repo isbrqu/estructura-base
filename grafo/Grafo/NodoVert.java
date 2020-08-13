@@ -62,7 +62,7 @@ public class NodoVert {
             NodoAdy actual1 = anterior1;
             NodoAdy actual2 = anterior2;
             boolean parar1 = actual1.equals(vertice, etiqueta);
-            boolean parar2 = actual2.equals(vertice, etiqueta);
+            boolean parar2 = actual2.equals(this, etiqueta);
             while ((!parar1 || !parar2) && exito) {
                 if (!parar1) {
                     actual1 = actual1.getSigAdyacente();
@@ -86,8 +86,19 @@ public class NodoVert {
                 }
             }
             if (exito) {
-                anterior1.setSigAdyacente(anterior1.getSigAdyacente().getSigAdyacente());
-                anterior2.setSigAdyacente(anterior2.getSigAdyacente().getSigAdyacente());
+                if (this.primerAdy == anterior1) {
+                    this.primerAdy = anterior1.getSigAdyacente();
+                } else {
+                    anterior1.setSigAdyacente(anterior1.getSigAdyacente().getSigAdyacente());
+                }
+                // se verifica que el vertice actual y el que se enlaza son distinto para el caso de los lazos, ejemplo a-1-a
+                if (vertice != this) {
+                    if (vertice.primerAdy == anterior2) {
+                        vertice.primerAdy = anterior2.getSigAdyacente();
+                    } else {
+                        anterior2.setSigAdyacente(anterior2.getSigAdyacente().getSigAdyacente());
+                    }
+                }
             }
         }
         return exito;
