@@ -3,7 +3,7 @@ package grafo.Grafo;
 public class TestGrafo {
 
     private static Grafo g = new Grafo();
-    private static Object[] vertice = {'A', 'B', 'E', 'B', 'F', 'G', 'D'};
+    private static char[] vertice = {'a', 'b', 'e', 'b', 'f', 'g', 'd'};
 
     public static void main(String[] args) {
         insertarVertice();
@@ -21,39 +21,40 @@ public class TestGrafo {
 
     public static void insertarVertice() {
         cartel("insertar vertice");
-        for (Object v : vertice) {
+        for (char v : vertice) {
+            v = Character.toUpperCase(v);
             System.out.println("insertar vertice " + v + ": " + g.insertarVertice(v));
         }
     }
 
     public static void insertarArco() {
         cartel("insertar arco");
-        Object[] origen = {'A', 'A', 'A', 'A', 'B', 'B', 'F', 'G', 'G', 'D', 'X', 'D', 'X'};
-        Object[] destino = {'B', 'F', 'G', 'G', 'F', 'F', 'F', 'D', 'D', 'D', 'D', 'X', 'X'};
-        int[] arco = {5, 9, 6, 1, 6, 2, 2, 3, 3, 1, 1, 1, 1};
-        Object origeni, destinoi;
-        int arcoi;
-        for (int i = 0; i < origen.length; i++) {
-            origeni = origen[i];
-            destinoi = destino[i];
-            arcoi = arco[i];
-            System.out.println("insertar arco " + origeni + "-" + arcoi + "-" + destinoi + ": " + g.insertarArco(origeni, destinoi, arcoi));
+        String[] arco = {"a-5-b", "a-9-f", "a-6-g", "a-1-g", "b-6-f", "b-2-f", "f-2-f", "g-3-d", "g-3-d", "d-1-d", "x-1-d", "d-1-x", "x-1-x"};
+        char origen, destino;
+        int etiqueta;
+        String[] t;
+        for (String a : arco) {
+            t = a.split("-");
+            origen = t[0].toUpperCase().charAt(0);
+            etiqueta = Integer.parseInt(t[1]);
+            destino = t[2].toUpperCase().charAt(0);
+            System.out.println("insertar arco " + origen + "-" + etiqueta + "-" + destino + ": " + g.insertarArco(origen, destino, etiqueta));
         }
         System.out.println();
     }
 
     public static void eliminarArco() {
         cartel("eliminar arco");
-        Object[] origen = {'A', 'A', 'G', 'F'};
-        Object[] destino = {'B', 'G', 'D', 'F'};
-        int[] arco = {5, 1, 3, 2};
-        Object origeni, destinoi;
-        int arcoi;
-        for (int i = 0; i < origen.length; i++) {
-            origeni = origen[i];
-            destinoi = destino[i];
-            arcoi = arco[i];
-            System.out.println("eliminar arco " + origeni + "-" + arcoi + "-" + destinoi + ": " + g.eliminarArco(origeni, destinoi, arcoi));
+        String[] arco = {"a-5-b", "a-1-g", "g-3-d", "f-2-f", "e-2-e", "d-0-g", "g-0-d", "x-0-e", "a-0-x", "a-0-e"};
+        char origen, destino;
+        int etiqueta;
+        String[] t;
+        for (String a : arco) {
+            t = a.split("-");
+            origen = t[0].toUpperCase().charAt(0);
+            etiqueta = Integer.parseInt(t[1]);
+            destino = t[2].toUpperCase().charAt(0);
+            System.out.println("eliminar arco " + origen + "-" + etiqueta + "-" + destino + ": " + g.eliminarArco(origen, destino, etiqueta));
         }
         System.out.println();
     }
