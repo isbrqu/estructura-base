@@ -27,7 +27,32 @@ public class Grafo {
     }
 
     public boolean eliminarVertice(Object elemento) {
-        //
+        boolean exito = false;
+        // verifica si ambos vertices existen
+        NodoVert anterior = null;
+        NodoVert vertice = this.inicio;
+        while (vertice != null && !exito) {
+            if (vertice.getElemento().equals(elemento)) {
+                exito = true;
+            } else {
+                anterior = vertice;
+                vertice = vertice.getSigVertice();
+            }
+        }
+        if (exito) {
+            // System.out.println("entro");
+            if (this.inicio == vertice) {
+                this.inicio = this.inicio.getSigVertice();
+            } else {
+                anterior.setSigVertice(vertice.getSigVertice());
+            }
+            NodoAdy adyacente;
+            while (vertice.getPrimerAdy() != null) {
+                adyacente = vertice.getPrimerAdy();
+                System.out.println("borrando vertice: " + adyacente.getVertice().getElemento());
+                vertice.desconectar(adyacente.getVertice(), adyacente.getEtiqueta());
+            }
+        }
         return false;
     }
 
@@ -184,27 +209,18 @@ public class Grafo {
             NodoVert vertice = this.inicio;
             NodoAdy adyacente;
             while (vertice != null) {
-                texto += vertice.getElemento() + ":";
+                texto += "[" + vertice.getElemento() + "]-->";
                 adyacente = vertice.getPrimerAdy();
-                if (adyacente == null) {
-                    texto += " sin adyacentes\n";
-                } else {
-                    texto += "\n";
-                    while (adyacente != null) {
-                        texto += "\t" + adyacente.getEtiqueta() + " --> " + adyacente.getVertice().getElemento() + "\n";
-                        adyacente = adyacente.getSigAdyacente();
-                    }
+                while (adyacente != null) {
+                    texto += "[" + adyacente.getEtiqueta() + "|" + adyacente.getVertice().getElemento() + "]-->";
+                    adyacente = adyacente.getSigAdyacente();
                 }
+                texto += "[#]\n |\n";
                 vertice = vertice.getSigVertice();
             }
+            texto += "[#]\n";
         }
         return texto;
-    }
-
-    public void llenar(int[] arreglo) {
-        for (int i : arreglo) {
-            this.insertarVertice(i);
-        }
     }
 
 }
