@@ -40,7 +40,7 @@ public class Grafo {
             }
         }
         if (exito) {
-            // System.out.println("entro");
+            System.out.println("entro");
             if (this.inicio == vertice) {
                 this.inicio = this.inicio.getSigVertice();
             } else {
@@ -49,8 +49,8 @@ public class Grafo {
             NodoAdy adyacente;
             while (vertice.getPrimerAdy() != null) {
                 adyacente = vertice.getPrimerAdy();
-                System.out.println("borrando vertice: " + adyacente.getVertice().getElemento());
-                vertice.desconectar(adyacente.getVertice(), adyacente.getEtiqueta());
+                System.out.println("eliminando: " + adyacente.getVertice().getElemento() + " con etiqueta " + adyacente.getEtiqueta());
+                System.out.println("se pudo eliminar: " + vertice.desconectar(adyacente.getVertice(), adyacente.getEtiqueta()));
             }
         }
         return false;

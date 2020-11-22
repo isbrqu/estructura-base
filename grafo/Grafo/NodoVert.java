@@ -66,19 +66,17 @@ public class NodoVert {
             while ((!parar1 || !parar2) && exito) {
                 if (!parar1) {
                     actual1 = actual1.getSigAdyacente();
-                    if (actual1 == null) {
-                        exito = false;
-                    } else {
+                    exito = actual1 != null;
+                    if (exito) {
                         parar1 = actual1.equals(vertice, etiqueta);
                         if (!parar1)
                             anterior1 = actual1;
                     }
                 }
-                if (!parar2) {
+                if (!parar2 && exito) {
                     actual2 = actual2.getSigAdyacente();
-                    if (actual2 == null) {
-                        exito = false;
-                    } else {
+                    exito = actual2 != null;
+                    if (exito) {
                         parar2 = actual2.equals(this, etiqueta);
                         if (!parar2)
                             anterior2 = actual2;

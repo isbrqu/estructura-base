@@ -1,0 +1,12 @@
+
+<project default="run" name="Estructuras de Datos">
+    <target name="compile">
+        <javac srcdir="./src/grafo/Grafo" destdir="bin" includeantruntime="false" />
+    </target>
+
+    <target name="run" depends="compile">
+        <java classname="grafo.Grafo.TestGrafo">
+            <classpath path="bin" />
+        </java>
+    </target>
+</project>
