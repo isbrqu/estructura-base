@@ -25,7 +25,7 @@ public class Test {
         print("cola:  " + cola);
         print("hay?   " + MixLineales.verificarBalanceo(cola) + "\n");
     }
-    
+
     public static void main(String[] args) {
         Cola cola = new Cola();
         Lista lista = new Lista();
